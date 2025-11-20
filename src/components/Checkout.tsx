@@ -134,7 +134,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
       });
       
       const orderDetails = `
-🧪 MY PEPTIDE JOURNEY - NEW ORDER
+🧪 Peptivate - NEW ORDER
 
 📅 ORDER DATE & TIME
 ${dateTimeStamp}
