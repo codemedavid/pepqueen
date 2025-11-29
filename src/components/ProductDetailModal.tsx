@@ -56,12 +56,12 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                 {product.purity_percentage}% Pure
               </span>
               {product.featured && (
-                <span className="inline-flex items-center px-1.5 py-0.5 sm:px-2 sm:py-1 md:px-3 md:py-1 rounded-full text-[10px] sm:text-xs md:text-sm font-semibold bg-yellow-400 text-yellow-900">
+                <span className="inline-flex items-center px-1.5 py-0.5 sm:px-2 sm:py-1 md:px-3 md:py-1 rounded-full text-[10px] sm:text-xs md:text-sm font-semibold bg-black/20 text-black backdrop-blur-sm border border-black/30">
                   ⭐ Featured
                 </span>
               )}
               {hasDiscount && (
-                <span className="inline-flex items-center px-1.5 py-0.5 sm:px-2 sm:py-1 md:px-3 md:py-1 rounded-full text-[10px] sm:text-xs md:text-sm font-semibold bg-pink-400 text-white">
+                <span className="inline-flex items-center px-1.5 py-0.5 sm:px-2 sm:py-1 md:px-3 md:py-1 rounded-full text-[10px] sm:text-xs md:text-sm font-semibold bg-black/20 text-black backdrop-blur-sm border border-black/30">
                   🎉 Sale
                 </span>
               )}
@@ -113,8 +113,11 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
               )}
 
               {/* Scientific Details */}
-              <div className="bg-gray-50 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-gray-200">
-                <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-2 sm:mb-3">Scientific Information</h3>
+              <div className="bg-gray-50 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-gold-300/30">
+                <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
+                  <Beaker className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-gold-600" />
+                  Scientific Information
+                </h3>
                 <div className="space-y-1.5 sm:space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-600 text-[11px] sm:text-xs md:text-sm">Purity:</span>
@@ -126,7 +129,17 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600 text-[11px] sm:text-xs md:text-sm">Stock:</span>
-                    <span className="font-medium text-gray-700 text-[11px] sm:text-xs md:text-sm">{product.stock_quantity} units</span>
+                    <span className={`font-medium text-[11px] sm:text-xs md:text-sm ${
+                      (product.variations && product.variations.length > 0
+                        ? product.variations.some(v => v.stock_quantity > 0)
+                        : product.stock_quantity > 0)
+                        ? 'text-gold-600' 
+                        : 'text-red-600'
+                      }`}>
+                      {product.variations && product.variations.length > 0
+                        ? product.variations.reduce((sum, v) => sum + v.stock_quantity, 0)
+                        : product.stock_quantity} units
+                    </span>
                   </div>
                 </div>
               </div>
@@ -146,7 +159,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                     ₱{currentPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
                   </div>
                   {hasDiscount && (
-                    <div className="inline-block bg-pink-500 text-white px-2 py-0.5 sm:px-2.5 sm:py-1 md:px-3 md:py-1 rounded-full text-[10px] sm:text-xs md:text-sm font-bold mt-1 sm:mt-1.5 md:mt-2">
+                    <div className="inline-block bg-gradient-to-r from-black to-gray-900 text-white px-2 py-0.5 sm:px-2.5 sm:py-1 md:px-3 md:py-1 rounded-full text-[10px] sm:text-xs md:text-sm font-bold mt-1 sm:mt-1.5 md:mt-2 border border-gold-500/20">
                       Save ₱{(product.base_price - product.discount_price!).toLocaleString('en-PH', { minimumFractionDigits: 0 })}
                     </div>
                   )}
@@ -237,11 +250,15 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
               </div>
 
               {/* Stock Alert */}
-              {product.available && product.stock_quantity < 10 && (
-                <div className="bg-orange-50 border border-orange-300 sm:border-2 rounded-lg sm:rounded-xl p-3 sm:p-4">
-                  <p className="text-xs sm:text-sm text-orange-800 font-semibold flex items-center gap-1.5 sm:gap-2">
+              {product.available && (product.variations && product.variations.length > 0
+                ? product.variations.some(v => v.stock_quantity > 0 && v.stock_quantity < 10)
+                : product.stock_quantity < 10 && product.stock_quantity > 0) && (
+                <div className="bg-gold-50 border border-gold-300 sm:border-2 rounded-lg sm:rounded-xl p-3 sm:p-4">
+                  <p className="text-xs sm:text-sm text-gold-800 font-semibold flex items-center gap-1.5 sm:gap-2">
                     <span className="text-base sm:text-lg md:text-xl">⚠️</span>
-                    Only {product.stock_quantity} units left in stock!
+                    Low stock! Only {product.variations && product.variations.length > 0
+                      ? product.variations.reduce((sum, v) => sum + v.stock_quantity, 0)
+                      : product.stock_quantity} units left
                   </p>
                 </div>
               )}

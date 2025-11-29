@@ -12,10 +12,11 @@ CREATE TABLE IF NOT EXISTS orders (
   
   -- Shipping Address
   shipping_address TEXT NOT NULL,
+  shipping_barangay TEXT NOT NULL,
   shipping_city TEXT NOT NULL,
   shipping_state TEXT NOT NULL,
   shipping_zip_code TEXT NOT NULL,
-  shipping_country TEXT NOT NULL,
+  shipping_country TEXT,
   
   -- Shipping Details
   shipping_location TEXT, -- NCR, LUZON, VISAYAS_MINDANAO
@@ -46,6 +47,26 @@ CREATE TABLE IF NOT EXISTS orders (
 -- Add new columns to existing table if they don't exist (for existing installations)
 DO $$ 
 BEGIN
+  -- Add shipping_barangay column if it doesn't exist
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name = 'orders' AND column_name = 'shipping_barangay'
+  ) THEN
+    ALTER TABLE orders ADD COLUMN shipping_barangay TEXT;
+    -- Update existing rows to have a default value if needed
+    UPDATE orders SET shipping_barangay = '' WHERE shipping_barangay IS NULL;
+    -- Make it NOT NULL after setting defaults
+    ALTER TABLE orders ALTER COLUMN shipping_barangay SET NOT NULL;
+  END IF;
+  
+  -- Make shipping_country nullable if it exists and is NOT NULL
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name = 'orders' AND column_name = 'shipping_country' AND is_nullable = 'NO'
+  ) THEN
+    ALTER TABLE orders ALTER COLUMN shipping_country DROP NOT NULL;
+  END IF;
+  
   -- Add shipping_location column if it doesn't exist
   IF NOT EXISTS (
     SELECT 1 FROM information_schema.columns 
