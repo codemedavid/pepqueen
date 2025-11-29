@@ -64,9 +64,15 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
   };
 
   const handleSaveMethod = async () => {
-    if (!formData.id || !formData.name || !formData.account_number || !formData.account_name || !formData.qr_code_url) {
-      alert('Please fill in all required fields');
+    if (!formData.id || !formData.name || !formData.account_number || !formData.account_name) {
+      alert('Please fill in all required fields (ID, Name, Account Number, and Account Name)');
       return;
+    }
+    
+    // QR code is optional but warn if missing
+    if (!formData.qr_code_url) {
+      const proceed = confirm('No QR code image provided. Continue without QR code?');
+      if (!proceed) return;
     }
 
     // Validate ID format (kebab-case)
@@ -140,7 +146,7 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
                 </button>
                 <button
                   onClick={handleSaveMethod}
-                  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200 flex items-center space-x-2"
+                  className="px-4 py-2 bg-gradient-to-r from-black to-gray-900 hover:from-gray-900 hover:to-black text-white rounded-lg transition-all duration-200 flex items-center space-x-2 shadow-lg hover:shadow-xl border border-gold-500/20"
                 >
                   <Save className="h-4 w-4" />
                   <span>Save</span>
@@ -159,7 +165,7 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
                   type="text"
                   value={formData.name}
                   onChange={(e) => handleNameChange(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gold-300/30 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-colors"
                   placeholder="e.g., GCash, Maya, Bank Transfer"
                 />
               </div>
@@ -170,7 +176,7 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
                   type="text"
                   value={formData.id}
                   onChange={(e) => setFormData({ ...formData, id: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gold-300/30 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-colors"
                   placeholder="kebab-case-id"
                   disabled={currentView === 'edit'}
                 />
@@ -188,7 +194,7 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
                   type="text"
                   value={formData.account_number}
                   onChange={(e) => setFormData({ ...formData, account_number: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gold-300/30 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-colors"
                   placeholder="09XX XXX XXXX or Account: 1234-5678-9012"
                 />
               </div>
@@ -199,15 +205,22 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
                   type="text"
                   value={formData.account_name}
                   onChange={(e) => setFormData({ ...formData, account_name: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gold-300/30 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-colors"
                   placeholder="HP GLOW"
                 />
               </div>
 
               <div>
+                <label className="block text-sm font-medium text-black mb-2">
+                  QR Code Image (Optional)
+                </label>
+                <p className="text-xs text-gray-500 mb-2">
+                  Upload a QR code image or paste an image URL. If upload fails, you can use the URL input below.
+                </p>
                 <ImageUpload
                   currentImage={formData.qr_code_url}
                   onImageChange={(imageUrl) => setFormData({ ...formData, qr_code_url: imageUrl || '' })}
+                  folder="menu-images"
                 />
               </div>
 
@@ -217,7 +230,7 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
                   type="number"
                   value={formData.sort_order}
                   onChange={(e) => setFormData({ ...formData, sort_order: Number(e.target.value) })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gold-300/30 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-colors"
                   placeholder="0"
                 />
                 <p className="text-xs text-gray-500 mt-1">
@@ -231,7 +244,7 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
                     type="checkbox"
                     checked={formData.active}
                     onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
-                    className="rounded border-gray-300 text-green-600 focus:ring-green-500"
+                    className="rounded border-gray-300 text-gold-600 focus:ring-gold-500"
                   />
                   <span className="text-sm font-medium text-black">Active Payment Method</span>
                 </label>
@@ -261,7 +274,7 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
             </div>
             <button
               onClick={handleAddMethod}
-              className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200"
+              className="flex items-center space-x-2 bg-gradient-to-r from-black to-gray-900 hover:from-gray-900 hover:to-black text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl border border-gold-500/20"
             >
               <Plus className="h-4 w-4" />
               <span>Add Payment Method</span>
@@ -281,7 +294,7 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
                 <p className="text-gray-500 mb-4">No payment methods found</p>
                 <button
                   onClick={handleAddMethod}
-                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200"
+                  className="bg-gradient-to-r from-black to-gray-900 hover:from-gray-900 hover:to-black text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl border border-gold-500/20"
                 >
                   Add First Payment Method
                 </button>
@@ -315,8 +328,8 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
                     <div className="flex items-center space-x-3">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                         method.active 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-red-100 text-red-800'
+                          ? 'bg-gold-100 text-gold-800 border border-gold-300' 
+                          : 'bg-gray-100 text-gray-600 border border-gray-300'
                       }`}>
                         {method.active ? 'Active' : 'Inactive'}
                       </span>
