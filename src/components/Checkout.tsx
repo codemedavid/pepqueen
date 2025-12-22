@@ -224,7 +224,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
           shipping_state: state,
           shipping_zip_code: zipCode,
           order_items: orderItems,
-          total_price: finalTotal, // Use finalTotal which includes discount
+          total_price: Math.max(0, totalPrice - discountAmount), // Store subtotal minus discount (not including shipping)
           shipping_fee: shippingFee,
           shipping_location: shippingLocation,
           payment_method_id: paymentMethod?.id || null,
