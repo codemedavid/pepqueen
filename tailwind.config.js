@@ -7,77 +7,131 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Magenta-led SlimDose Brand Theme
-        'theme-bg': '#FFFFFF',        // Pure white background
-        'theme-text': '#111111',      // Charcoal black (headings)
-        'theme-accent': '#E91E63',    // Primary Magenta (hero color)
-        'theme-accent-hover': '#FF4F9A', // Neon pink for hover
-        'theme-secondary': '#F4F4F6', // Soft gray (UI backgrounds)
-        'text-secondary': '#4A4A4A',  // Cool dark gray (body text)
+        // ChainForm - Clean Scientific Wellness Theme
+        'theme-bg': '#FAFAFC',        // Warm white background
+        'theme-text': '#3A3A44',      // Soft charcoal (text)
+        'theme-accent': '#6F6AD9',    // Soft Scientific Purple (primary)
+        'theme-accent-hover': '#5B56C5', // Darker purple for hover
+        'theme-secondary': '#EEF0F6', // Cool light gray (sections)
+        'text-secondary': '#5A5A66',  // Medium gray (body text)
 
-        // Magenta scale (primary brand color)
-        magenta: {
-          50: '#FCE4EC',
-          100: '#F8BBD9',
-          200: '#F48FB1',
-          300: '#F06292',
-          400: '#EC407A',
-          500: '#E91E63', // Primary magenta
-          600: '#D81B60',
-          700: '#C2185B',
-          800: '#AD1457',
-          900: '#880E4F',
+        // Purple scale (primary brand color)
+        purple: {
+          50: '#F0F0FA',
+          100: '#E0E0F5',
+          200: '#C5C4ED',
+          300: '#A9A7E5',
+          400: '#8D8ADE',
+          500: '#6F6AD9', // Primary soft purple
+          600: '#5B56C5',
+          700: '#4A45A8',
+          800: '#3A368A',
+          900: '#2B296B',
         },
-        // Primary scale mapped to magenta for compatibility
+        // Primary scale mapped to purple for compatibility
         primary: {
-          50: '#FCE4EC',
-          100: '#F8BBD9',
-          200: '#F48FB1',
-          300: '#F06292',
-          400: '#EC407A',
-          500: '#E91E63',
-          600: '#D81B60',
-          700: '#C2185B',
-          800: '#AD1457',
-          900: '#880E4F',
+          50: '#F0F0FA',
+          100: '#E0E0F5',
+          200: '#C5C4ED',
+          300: '#A9A7E5',
+          400: '#8D8ADE',
+          500: '#6F6AD9',
+          600: '#5B56C5',
+          700: '#4A45A8',
+          800: '#3A368A',
+          900: '#2B296B',
+        },
+        // Maroon for depth/trust
+        maroon: {
+          50: '#F5EDF1',
+          100: '#EBDAE3',
+          200: '#D6B5C7',
+          300: '#C291AB',
+          400: '#AD6C8F',
+          500: '#7A3E5C', // Muted maroon
+          600: '#6A3550',
+          700: '#5A2C43',
+          800: '#4A2437',
+          900: '#3A1B2A',
         },
         // Accent colors
         accent: {
-          light: '#FF4F9A',   // Neon pink
-          DEFAULT: '#E91E63', // Magenta
-          dark: '#C2185B',
-          white: '#FFFFFF',
-          black: '#111111',
+          pink: '#E8A6B8',   // Soft blush pink
+          sage: '#8CBFA8',   // Calm sage green
+          DEFAULT: '#6F6AD9', // Purple
+          white: '#FAFAFC',
+          charcoal: '#3A3A44',
         },
-        // Teal for biotech credibility (optional contrast)
+        // Sage green scale (health & supplies)
+        sage: {
+          50: '#F2F7F4',
+          100: '#E4EFE9',
+          200: '#C9DFD3',
+          300: '#AECFBD',
+          400: '#9DCFAD',
+          500: '#8CBFA8', // Main sage
+          600: '#7AAD96',
+          700: '#679A83',
+          800: '#548770',
+          900: '#41745D',
+        },
+        // Blush pink scale (human touch)
+        blush: {
+          50: '#FCF5F7',
+          100: '#F9EBEF',
+          200: '#F3D7DF',
+          300: '#EEC3CF',
+          400: '#E8B0BF',
+          500: '#E8A6B8', // Main blush
+          600: '#D98FA6',
+          700: '#CA7894',
+          800: '#BB6182',
+          900: '#AC4A70',
+        },
+        // Backward compatibility mappings
+        magenta: {
+          50: '#F0F0FA',
+          100: '#E0E0F5',
+          200: '#C5C4ED',
+          300: '#A9A7E5',
+          400: '#8D8ADE',
+          500: '#6F6AD9',
+          600: '#5B56C5',
+          700: '#4A45A8',
+          800: '#3A368A',
+          900: '#2B296B',
+        },
         teal: {
-          50: '#E0F7F5',
-          100: '#B2EBE5',
-          200: '#80DED3',
-          300: '#4DD0C1',
-          400: '#26C6B3',
-          500: '#00B3A4', // Main teal
-          600: '#00A396',
-          700: '#009085',
-          800: '#007D73',
-          900: '#005C55',
+          50: '#F2F7F4',
+          100: '#E4EFE9',
+          200: '#C9DFD3',
+          300: '#AECFBD',
+          400: '#9DCFAD',
+          500: '#8CBFA8',
+          600: '#7AAD96',
+          700: '#679A83',
+          800: '#548770',
+          900: '#41745D',
         },
-        // Navy kept for backward compatibility, mapped to magenta tones
         navy: {
-          50: '#FCE4EC',
-          100: '#F8BBD9',
-          200: '#F48FB1',
-          300: '#F06292',
-          400: '#EC407A',
-          500: '#E91E63',
-          600: '#D81B60',
-          700: '#C2185B',
-          800: '#AD1457',
-          900: '#880E4F',
+          50: '#F0F0FA',
+          100: '#E0E0F5',
+          200: '#C5C4ED',
+          300: '#A9A7E5',
+          400: '#8D8ADE',
+          500: '#6F6AD9',
+          600: '#5B56C5',
+          700: '#4A45A8',
+          800: '#3A368A',
+          900: '#2B296B',
         },
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
+        grotesk: ['Space Grotesk', 'sans-serif'],
+      },
+      borderRadius: {
+        'brand': '10px', // ChainForm 8-12px rounded corners
       },
       boxShadow: {
         'soft': '0 2px 10px rgba(0, 0, 0, 0.03)',

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, ShieldCheck, Truck, Clock, Sparkles, Zap, Award } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Truck, Clock, Beaker, Award, Zap } from 'lucide-react';
 import { useSiteSettings } from '../hooks/useSiteSettings';
 
 interface HeroProps {
@@ -14,182 +14,160 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
     setIsVisible(true);
   }, []);
 
-  // Use settings or fallbacks if loading/missing
-  const badgeText = siteSettings?.hero_badge_text || 'Premium Peptide Solutions';
-  const tagline = siteSettings?.hero_tagline || 'Quality-tested products. Reliable performance. Trusted by our community.';
-  const description = siteSettings?.hero_description || 'Your all-in-one destination for high-quality peptides, peptide pens, and essential accessories for a smooth and confident wellness routine.';
+  const description = siteSettings?.hero_description || 'Your all-in-one destination for high-quality peptides, peptide pens, and essential accessories for your wellness journey.';
 
   return (
-    <div className="relative min-h-[85vh] bg-gradient-to-br from-gray-50 via-white to-magenta-50/30 overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Top gradient bar */}
-        <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-magenta-600 via-magenta-400 to-teal-400" />
+    <div className="relative min-h-[95vh] overflow-hidden bg-[#0a0a1a]">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0">
+        {/* Main gradient mesh */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] via-[#1a1a3a] to-[#0a0a1a]" />
 
-        {/* Floating orbs */}
-        <div className="absolute top-20 right-[10%] w-72 h-72 bg-gradient-to-br from-magenta-400/20 to-magenta-600/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-40 left-[5%] w-56 h-56 bg-gradient-to-br from-teal-400/15 to-teal-600/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-20 right-[20%] w-64 h-64 bg-gradient-to-br from-magenta-300/15 to-pink-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        <div className="absolute -bottom-10 -left-10 w-80 h-80 bg-gradient-to-tr from-magenta-500/10 to-transparent rounded-full blur-3xl" />
+        {/* Glowing orbs */}
+        <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-gradient-to-br from-blue-600/30 via-purple-600/20 to-transparent rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-30%] left-[-20%] w-[700px] h-[700px] bg-gradient-to-tr from-purple-600/25 via-blue-500/15 to-transparent rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-[40%] left-[50%] w-[400px] h-[400px] bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '2s' }} />
 
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-30" />
+        {/* Floating particles */}
+        <div className="absolute top-[15%] left-[10%] w-2 h-2 bg-blue-400 rounded-full animate-bounce opacity-60" style={{ animationDuration: '3s' }} />
+        <div className="absolute top-[25%] right-[15%] w-3 h-3 bg-purple-400 rounded-full animate-bounce opacity-50" style={{ animationDuration: '4s', animationDelay: '0.5s' }} />
+        <div className="absolute top-[60%] left-[20%] w-2 h-2 bg-cyan-400 rounded-full animate-bounce opacity-40" style={{ animationDuration: '3.5s', animationDelay: '1s' }} />
+        <div className="absolute top-[70%] right-[25%] w-2 h-2 bg-blue-300 rounded-full animate-bounce opacity-50" style={{ animationDuration: '4.5s', animationDelay: '1.5s' }} />
+        <div className="absolute top-[45%] left-[80%] w-1.5 h-1.5 bg-purple-300 rounded-full animate-bounce opacity-60" style={{ animationDuration: '3s', animationDelay: '2s' }} />
 
-        {/* Decorative pulse lines */}
-        <svg className="absolute top-1/4 left-0 w-full h-20 opacity-10" viewBox="0 0 1200 80" fill="none">
-          <path d="M0 40 L200 40 L250 10 L300 70 L350 25 L400 55 L450 40 L1200 40" stroke="url(#pulse-gradient)" strokeWidth="2" />
-          <defs>
-            <linearGradient id="pulse-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#E91E63" stopOpacity="0" />
-              <stop offset="50%" stopColor="#E91E63" />
-              <stop offset="100%" stopColor="#00B3A4" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-        </svg>
+        {/* Grid overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+
+        {/* Radial gradient overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,10,26,0.4)_70%)]" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-32 z-10">
-        <div className="max-w-5xl mx-auto">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24 md:pt-24 md:pb-32">
 
-          {/* Content */}
-          <div className={`transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+        {/* Main Content */}
+        <div className={`flex flex-col items-center transition-all duration-1000 ease-out transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
 
-            {/* Badge */}
-            <div className="flex justify-center mb-8">
-              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 backdrop-blur-sm border border-magenta-200 shadow-lg shadow-magenta-500/10">
-                <Sparkles className="w-4 h-4 text-magenta-500 animate-pulse" />
-                <span className="text-sm font-bold tracking-wide uppercase bg-gradient-to-r from-magenta-600 to-magenta-500 bg-clip-text text-transparent">
-                  {badgeText}
-                </span>
-              </div>
+          {/* Premium Badge */}
+          <div className={`mb-8 transition-all duration-700 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 border border-white/10 backdrop-blur-sm">
+              <Zap className="w-4 h-4 text-yellow-400" />
+              <span className="text-sm font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-purple-300 to-cyan-300">
+                Premium Peptide & Medical Supplies
+              </span>
+              <Zap className="w-4 h-4 text-yellow-400" />
             </div>
-
-            {/* Main Headline */}
-            <div className="text-center mb-10">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] mb-6">
-                <span className="text-gray-900">Your </span>
-                <span className="relative inline-block">
-                  <span className="bg-gradient-to-r from-magenta-600 via-magenta-500 to-pink-500 bg-clip-text text-transparent">
-                    Peptide
-                  </span>
-                  <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none">
-                    <path d="M2 8 Q50 2 100 8 T198 8" stroke="url(#underline-gradient)" strokeWidth="4" strokeLinecap="round" />
-                    <defs>
-                      <linearGradient id="underline-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#E91E63" />
-                        <stop offset="100%" stopColor="#FF4F9A" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </span>
-                <br className="hidden sm:block" />
-                <span className="text-gray-900">Journey Starts Here</span>
-              </h1>
-
-              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                {description}
-              </p>
-            </div>
-
-            {/* Animated Pulse Line */}
-            <div className="flex justify-center mb-10">
-              <div className="relative">
-                <svg className="w-80 md:w-96 h-12" viewBox="0 0 300 40" fill="none">
-                  <path
-                    d="M0 20 L60 20 L80 20 L100 5 L120 35 L140 12 L160 28 L180 20 L220 20 L240 5 L260 35 L280 12 L300 20"
-                    stroke="url(#line-gradient)"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="animate-pulse"
-                  />
-                  <defs>
-                    <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#E91E63" stopOpacity="0.3" />
-                      <stop offset="50%" stopColor="#E91E63" />
-                      <stop offset="100%" stopColor="#00B3A4" stopOpacity="0.3" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-magenta-500 rounded-full animate-ping" />
-              </div>
-            </div>
-
-            {/* Feature Cards Row */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 max-w-3xl mx-auto">
-              <div className="group flex items-center gap-3 p-4 bg-white/70 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-magenta-200 transition-all duration-300 hover:-translate-y-1">
-                <div className="p-2.5 bg-gradient-to-br from-magenta-500 to-magenta-600 rounded-xl text-white shadow-lg shadow-magenta-500/30 group-hover:scale-110 transition-transform">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="font-bold text-gray-900 text-sm">Lab Tested</p>
-                  <p className="text-xs text-gray-500">99%+ Purity</p>
-                </div>
-              </div>
-
-              <div className="group flex items-center gap-3 p-4 bg-white/70 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-teal-200 transition-all duration-300 hover:-translate-y-1">
-                <div className="p-2.5 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl text-white shadow-lg shadow-teal-500/30 group-hover:scale-110 transition-transform">
-                  <Zap className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="font-bold text-gray-900 text-sm">Fast Acting</p>
-                  <p className="text-xs text-gray-500">Premium Quality</p>
-                </div>
-              </div>
-
-              <div className="group flex items-center gap-3 p-4 bg-white/70 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-magenta-200 transition-all duration-300 hover:-translate-y-1">
-                <div className="p-2.5 bg-gradient-to-br from-magenta-400 to-pink-500 rounded-xl text-white shadow-lg shadow-pink-500/30 group-hover:scale-110 transition-transform">
-                  <Award className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="font-bold text-gray-900 text-sm">Trusted</p>
-                  <p className="text-xs text-gray-500">By Community</p>
-                </div>
-              </div>
-            </div>
-
-            {/* CTA Button */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <button
-                onClick={onShopAll}
-                className="group relative px-10 py-5 bg-gradient-to-r from-magenta-600 to-magenta-500 text-white rounded-2xl font-bold text-lg shadow-2xl shadow-magenta-500/40 hover:shadow-magenta-500/50 hover:from-magenta-500 hover:to-magenta-400 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                <span className="relative flex items-center justify-center gap-3">
-                  <Sparkles className="w-5 h-5" />
-                  Shop All Products
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </button>
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="flex flex-wrap justify-center items-center gap-8 pt-8 border-t border-gray-200/50">
-              <div className="flex items-center gap-2.5 text-sm font-semibold text-gray-600">
-                <div className="p-1.5 bg-teal-100 rounded-lg">
-                  <Truck className="w-4 h-4 text-teal-600" />
-                </div>
-                <span>Fast Shipping</span>
-              </div>
-              <div className="w-px h-6 bg-gradient-to-b from-transparent via-gray-300 to-transparent" />
-              <div className="flex items-center gap-2.5 text-sm font-semibold text-gray-600">
-                <div className="p-1.5 bg-magenta-100 rounded-lg">
-                  <Clock className="w-4 h-4 text-magenta-600" />
-                </div>
-                <span>24/7 Support</span>
-              </div>
-              <div className="w-px h-6 bg-gradient-to-b from-transparent via-gray-300 to-transparent hidden sm:block" />
-              <div className="flex items-center gap-2.5 text-sm font-semibold text-gray-600">
-                <div className="p-1.5 bg-green-100 rounded-lg">
-                  <ShieldCheck className="w-4 h-4 text-green-600" />
-                </div>
-                <span>Secure Checkout</span>
-              </div>
-            </div>
-
           </div>
+
+          {/* Main Headline - Dramatic */}
+          <div className={`text-center mb-8 transition-all duration-700 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            <h1 className="font-grotesk text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.95] mb-4">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 drop-shadow-lg">
+                Connected Science.
+              </span>
+              <span className="block text-white mt-2">
+                Clean Solutions.
+              </span>
+            </h1>
+          </div>
+
+          {/* Subheadline */}
+          <p className={`text-lg md:text-xl text-slate-300 text-center max-w-2xl mb-12 leading-relaxed transition-all duration-700 delay-[400ms] ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            {description}
+          </p>
+
+          {/* CTA Buttons */}
+          <div className={`flex flex-col sm:flex-row gap-4 mb-16 transition-all duration-700 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            {/* Primary CTA - Glowing */}
+            <button
+              onClick={onShopAll}
+              className="group relative px-10 py-5 rounded-2xl font-bold text-lg overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-[length:200%_100%] hover:shadow-2xl hover:shadow-purple-500/40 transition-all duration-300"
+            >
+              {/* Shimmer */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+              {/* Content */}
+              <span className="relative flex items-center justify-center gap-3 text-white">
+                Shop All Products
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </button>
+
+            {/* Secondary CTA - Glass */}
+            <button
+              onClick={onShopAll}
+              className="group px-10 py-5 bg-white/5 backdrop-blur-sm border border-white/20 text-white rounded-2xl font-bold text-lg hover:bg-white/10 hover:border-white/30 transition-all duration-300"
+            >
+              <span className="flex items-center justify-center gap-2">
+                <Beaker className="w-5 h-5 text-cyan-400" />
+                View Lab Reports
+              </span>
+            </button>
+          </div>
+
+          {/* Feature Cards - Glassmorphism */}
+          <div className={`grid grid-cols-1 md:grid-cols-3 gap-5 w-full max-w-4xl mb-16 transition-all duration-700 delay-[600ms] ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            {/* Card 1 */}
+            <div className="group p-6 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg shadow-blue-500/30">
+                  <ShieldCheck className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="font-bold text-white text-lg">Lab Tested</p>
+                  <p className="text-sm text-slate-400">99%+ Purity Verified</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div className="group p-6 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg shadow-purple-500/30">
+                  <Beaker className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="font-bold text-white text-lg">Science-Forward</p>
+                  <p className="text-sm text-slate-400">Research Grade Quality</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div className="group p-6 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl shadow-lg shadow-cyan-500/30">
+                  <Award className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="font-bold text-white text-lg">Trusted</p>
+                  <p className="text-sm text-slate-400">By Our Community</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Trust Bar */}
+          <div className={`flex flex-wrap justify-center items-center gap-8 md:gap-12 py-6 px-10 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 transition-all duration-700 delay-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            <div className="flex items-center gap-3 text-slate-300">
+              <Truck className="w-5 h-5 text-blue-400" />
+              <span className="font-medium">Fast Shipping</span>
+            </div>
+            <div className="hidden md:block w-px h-6 bg-white/20" />
+            <div className="flex items-center gap-3 text-slate-300">
+              <Clock className="w-5 h-5 text-purple-400" />
+              <span className="font-medium">24/7 Support</span>
+            </div>
+            <div className="hidden md:block w-px h-6 bg-white/20" />
+            <div className="flex items-center gap-3 text-slate-300">
+              <ShieldCheck className="w-5 h-5 text-cyan-400" />
+              <span className="font-medium">Secure Checkout</span>
+            </div>
+          </div>
+
         </div>
       </div>
+
+      {/* Bottom Gradient Fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
     </div>
   );
 };

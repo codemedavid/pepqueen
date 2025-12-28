@@ -63,7 +63,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
   const decrementQuantity = () => setQuantity(prev => prev > 1 ? prev - 1 : 1);
 
   return (
-    <div className="bg-white h-full flex flex-col group relative border-2 border-navy-900 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">
+    <div className="bg-white h-full flex flex-col group relative border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-300 transition-all duration-300">
       {/* Click overlay for product details */}
       <div
         onClick={() => onProductClick?.(product)}
@@ -88,12 +88,12 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2 pointer-events-none">
           {product.featured && (
-            <span className="badge badge-accent">
+            <span className="px-2.5 py-1 text-xs font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg shadow-lg">
               Featured
             </span>
           )}
           {hasDiscount && (
-            <span className="badge bg-theme-secondary text-white">
+            <span className="px-2.5 py-1 text-xs font-bold bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg shadow-lg">
               {Math.round((1 - currentPrice / originalPrice) * 100)}% OFF
             </span>
           )}
@@ -131,12 +131,12 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
                     }}
                     disabled={isOutOfStock}
                     className={`
-                      px-2 py-1 text-xs rounded border transition-colors relative z-20
+                      px-2.5 py-1 text-xs rounded-lg border transition-all relative z-20
                       ${selectedVariation?.id === variation.id && !isOutOfStock
-                        ? 'bg-navy-900 text-white border-navy-900'
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-transparent shadow-md'
                         : isOutOfStock
-                          ? 'bg-gray-50 text-gray-300 border-gray-100 cursor-not-allowed'
-                          : 'bg-white text-gray-600 border-gray-200 hover:border-navy-900'
+                          ? 'bg-slate-50 text-slate-300 border-slate-100 cursor-not-allowed'
+                          : 'bg-white text-slate-600 border-slate-200 hover:border-blue-400 hover:text-blue-600'
                       }
                     `}
                   >
@@ -224,7 +224,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
                 handleAddToCart();
               }}
               disabled={!hasAnyStock || availableStock === 0 || !product.available}
-              className="flex-1 min-w-0 bg-navy-900 text-white px-2 sm:px-3 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium hover:bg-navy-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1 sm:gap-2"
+              className="flex-1 min-w-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium hover:shadow-lg hover:shadow-blue-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1 sm:gap-2"
             >
               <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
               <span>Add</span>

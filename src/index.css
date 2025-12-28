@@ -1,27 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Magenta-led Peptide Pulse Brand Theme */
-  --theme-bg: #FFFFFF;
-  --theme-text: #111111;
-  --theme-accent: #E91E63;
-  --theme-accent-hover: #FF4F9A;
-  --theme-secondary: #F4F4F6;
-  --text-secondary: #4A4A4A;
+  /* ChainForm - Clean Scientific Wellness Theme */
+  --theme-bg: #FAFAFC;
+  --theme-text: #3A3A44;
+  --theme-accent: #6F6AD9;
+  --theme-accent-hover: #5B56C5;
+  --theme-secondary: #EEF0F6;
+  --text-secondary: #5A5A66;
 
-  --primary-magenta: #E91E63;
-  --primary-white: #ffffff;
+  /* ChainForm Color Palette */
+  --primary-purple: #6F6AD9;
+  --primary-white: #FAFAFC;
+  --accent-maroon: #7A3E5C;
+  --accent-pink: #E8A6B8;
+  --accent-sage: #8CBFA8;
 
-  --gray-50: #FFFFFF;
-  --gray-100: #F9F9F9;
-  --gray-200: #F4F4F6;
-  --gray-300: #E5E5E5;
-  --gray-500: #888888;
-  --gray-900: #111111;
+  --gray-50: #FAFAFC;
+  --gray-100: #F5F6F9;
+  --gray-200: #EEF0F6;
+  --gray-300: #D8DCE6;
+  --gray-500: #8A8E99;
+  --gray-900: #3A3A44;
 }
 
 * {
@@ -36,7 +41,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--theme-bg);
   color: var(--theme-text);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 h1,
@@ -45,32 +50,33 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
   font-weight: 600;
   color: var(--theme-text);
   letter-spacing: -0.02em;
 }
 
-/* Magenta Brand Button Styles */
+/* ChainForm Brand Button Styles */
 .btn-primary {
-  @apply bg-magenta-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-magenta-400 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+  @apply bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl font-medium hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-200 transform hover:-translate-y-0.5;
 }
 
 .btn-secondary {
-  @apply bg-transparent text-theme-text border border-theme-text px-6 py-3 rounded-md font-medium transition-all duration-200 hover:bg-magenta-500 hover:text-white hover:border-magenta-500 active:scale-95;
+  @apply bg-transparent text-blue-600 border-2 border-blue-500 px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:bg-blue-600 hover:text-white active:scale-95;
 }
 
 .btn-outline {
-  @apply bg-transparent text-theme-text border border-gray-300 px-4 py-2 rounded-md font-medium transition-all duration-200 hover:border-magenta-500 hover:text-magenta-500;
+  @apply bg-transparent text-slate-700 border border-slate-300 px-4 py-2 rounded-xl font-medium transition-all duration-200 hover:border-blue-500 hover:text-blue-600;
 }
 
 .btn-gold {
-  /* Backward compatibility mapping to magenta accent */
-  @apply bg-magenta-500 text-white px-6 py-3 rounded-md font-medium transition-all duration-200 hover:bg-magenta-400 active:scale-95 shadow-sm;
+  /* Backward compatibility mapping to gradient accent */
+  @apply bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/30 active:scale-95;
 }
 
 /* Minimalist Card Styles */
 .card {
-  @apply bg-white rounded-lg shadow-soft transition-all duration-200 border border-transparent hover:border-gray-200;
+  @apply bg-white rounded-xl shadow-soft transition-all duration-200 border border-transparent hover:border-gray-200;
 }
 
 .card-hover {
@@ -83,11 +89,11 @@ h6 {
 }
 
 .badge-gold {
-  @apply bg-theme-bg text-theme-secondary border border-theme-secondary;
+  @apply bg-blue-50 text-blue-600 border border-blue-200;
 }
 
 .badge-accent {
-  @apply bg-theme-accent bg-opacity-10 text-theme-accent border border-theme-accent border-opacity-20;
+  @apply bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0;
 }
 
 .badge-black {
@@ -96,7 +102,7 @@ h6 {
 
 /* Input Styles */
 .input-field {
-  @apply w-full px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-theme-accent focus:border-theme-accent transition-all bg-white hover:border-gray-300;
+  @apply w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-30 focus:border-purple-500 transition-all bg-white hover:border-gray-300;
 }
 
 .input-field:disabled {
@@ -184,9 +190,9 @@ h6 {
   }
 }
 
-/* Text Gradients (Simplified/Removed for minimalism, keeping simple colors) */
+/* Text Gradients (ChainForm brand style) */
 .text-gradient-gold {
-  @apply text-theme-secondary;
+  @apply text-purple-500;
 }
 
 .text-gradient-black {
@@ -196,4 +202,16 @@ h6 {
 *:focus-visible {
   outline: 2px solid var(--theme-accent);
   outline-offset: 2px;
+}
+
+/* ChainForm Brand Gradient */
+.brand-gradient {
+  background: linear-gradient(135deg, var(--primary-purple) 0%, var(--accent-sage) 100%);
+}
+
+.brand-gradient-text {
+  background: linear-gradient(135deg, var(--primary-purple) 0%, var(--accent-maroon) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
