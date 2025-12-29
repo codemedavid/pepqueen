@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle, Heart, HelpCircle, Calculator, FileText, Truck, ClipboardCheck } from 'lucide-react';
+import { MessageCircle, Shield, Heart, HelpCircle, Calculator, FileText, Truck, ClipboardCheck } from 'lucide-react';
 import { useCOAPageSetting } from '../hooks/useCOAPageSetting';
 
 const Footer: React.FC = () => {
@@ -7,35 +7,35 @@ const Footer: React.FC = () => {
   const { coaPageEnabled } = useCOAPageSetting();
 
   return (
-    <footer className="bg-gradient-to-b from-white to-slate-50 border-t border-slate-200 pt-12 pb-6">
+    <footer className="bg-white border-t border-neutral-200 pt-12 pb-6">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
 
           {/* Brand Section */}
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl overflow-hidden bg-white shadow-lg shadow-blue-500/10 flex items-center justify-center p-1.5 border border-slate-100">
+            <div className="w-10 h-10 rounded-brand overflow-hidden border border-neutral-100">
               <img
-                src="/logo.jpg"
+                src="/assets/logo.jpg"
                 alt="ChainForm"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
             <div className="text-left">
-              <div className="font-bold text-lg tracking-tight font-grotesk bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <div className="font-bold text-theme-text text-lg tracking-tight font-space-grotesk">
                 ChainForm
               </div>
-              <div className="text-xs text-slate-500">Connected Biology</div>
+              <div className="text-xs text-neutral-500">Connected Science. Clean Solutions.</div>
             </div>
           </div>
 
           {/* Contact Emails */}
-          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-sm text-slate-500">
-            <span className="text-xs font-medium text-slate-400 uppercase">Contact Us:</span>
-            <a href="mailto:peptidewhisperer@gmail.com" className="hover:text-blue-600 transition-colors">
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-sm text-neutral-500">
+            <span className="text-xs font-medium text-neutral-400 uppercase">Contact Us:</span>
+            <a href="mailto:peptidewhisperer@gmail.com" className="hover:text-purple-500 transition-colors">
               peptidewhisperer@gmail.com
             </a>
-            <span className="hidden sm:inline text-slate-300">|</span>
-            <a href="mailto:thepeptidepulse@gmail.com" className="hover:text-purple-600 transition-colors">
+            <span className="hidden sm:inline text-neutral-300">|</span>
+            <a href="mailto:thepeptidepulse@gmail.com" className="hover:text-purple-500 transition-colors">
               thepeptidepulse@gmail.com
             </a>
           </div>
@@ -44,14 +44,14 @@ const Footer: React.FC = () => {
           <div className="flex flex-wrap items-center gap-4 justify-center md:justify-end">
             <a
               href="/track-order"
-              className="text-slate-500 hover:text-blue-600 transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-neutral-500 hover:text-purple-500 transition-colors flex items-center gap-2 text-sm font-medium"
             >
               <Truck className="w-4 h-4" />
               Track Order
             </a>
             <a
               href="/calculator"
-              className="text-slate-500 hover:text-purple-600 transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-neutral-500 hover:text-sage-500 transition-colors flex items-center gap-2 text-sm font-medium"
             >
               <Calculator className="w-4 h-4" />
               Calculator
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
             {coaPageEnabled && (
               <a
                 href="/coa"
-                className="text-slate-500 hover:text-blue-600 transition-colors flex items-center gap-2 text-sm font-medium"
+                className="text-neutral-500 hover:text-purple-500 transition-colors flex items-center gap-2 text-sm font-medium"
               >
                 <FileText className="w-4 h-4" />
                 Lab Tests
@@ -67,14 +67,14 @@ const Footer: React.FC = () => {
             )}
             <a
               href="/faq"
-              className="text-slate-500 hover:text-purple-600 transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-neutral-500 hover:text-sage-500 transition-colors flex items-center gap-2 text-sm font-medium"
             >
               <HelpCircle className="w-4 h-4" />
               FAQ
             </a>
             <a
               href="/assessment"
-              className="text-slate-500 hover:text-blue-600 transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-neutral-500 hover:text-purple-500 transition-colors flex items-center gap-2 text-sm font-medium"
             >
               <ClipboardCheck className="w-4 h-4" />
               Assessment
@@ -83,16 +83,16 @@ const Footer: React.FC = () => {
               href="https://t.me/+k3SfL4WjnMQ3NGRl"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-500 hover:text-purple-600 transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-neutral-500 hover:text-[#0088cc] transition-colors flex items-center gap-2 text-sm font-medium"
             >
               <MessageCircle className="w-4 h-4" />
-              Community
+              Join Community
             </a>
             <a
               href="https://www.tiktok.com/@peptidepulse20?_r=1&_t=ZS-92SrpIepm5s"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-500 hover:text-blue-600 transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-neutral-500 hover:text-black transition-colors flex items-center gap-2 text-sm font-medium"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -109,11 +109,11 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Footer Bottom */}
-        <div className="border-t border-slate-200 pt-6 text-center">
-          <p className="text-xs text-slate-400 flex items-center justify-center gap-1">
+        <div className="border-t border-neutral-100 pt-6 text-center">
+          <p className="text-xs text-neutral-400 flex items-center justify-center gap-1">
             Made with
-            <Heart className="w-3 h-3 text-purple-500 fill-purple-500" />
-            © {currentYear} ChainForm. All rights reserved.
+            <Heart className="w-3 h-3 text-blush-400 fill-blush-400" />
+            © {currentYear} ChainForm.
           </p>
         </div>
       </div>
@@ -122,5 +122,3 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
-
-
