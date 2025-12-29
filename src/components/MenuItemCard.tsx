@@ -64,18 +64,21 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
 
   return (
     <div
-      className="bg-white h-full flex flex-col group relative rounded-2xl overflow-hidden transition-all duration-400"
+      className="h-full flex flex-col group relative rounded-2xl overflow-hidden transition-all duration-400"
       style={{
-        border: '2px solid #D4AF37',
-        boxShadow: '0 8px 32px rgba(212, 175, 55, 0.15), 0 4px 16px rgba(209, 140, 163, 0.1)',
+        backgroundColor: '#1a1a1a',
+        border: '2px solid rgba(212, 175, 55, 0.4)',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(212, 175, 55, 0.1)',
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'translateY(-6px)';
-        e.currentTarget.style.boxShadow = '0 16px 48px rgba(212, 175, 55, 0.25), 0 8px 24px rgba(209, 140, 163, 0.15)';
+        e.currentTarget.style.borderColor = '#D4AF37';
+        e.currentTarget.style.boxShadow = '0 16px 48px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.2)';
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = 'translateY(0)';
-        e.currentTarget.style.boxShadow = '0 8px 32px rgba(212, 175, 55, 0.15), 0 4px 16px rgba(209, 140, 163, 0.1)';
+        e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.4)';
+        e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(212, 175, 55, 0.1)';
       }}
     >
       {/* Click overlay for product details */}
@@ -86,7 +89,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
       />
 
       {/* Product Image */}
-      <div className="relative h-48 bg-blush-50 overflow-hidden">
+      <div className="relative h-48 overflow-hidden" style={{ backgroundColor: '#252525' }}>
         {product.image_url ? (
           <img
             src={product.image_url}
@@ -94,7 +97,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-rose-200">
+          <div className="w-full h-full flex items-center justify-center" style={{ color: '#404040' }}>
             <Package className="w-12 h-12" />
           </div>
         )}
@@ -105,8 +108,8 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
             <span
               className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold"
               style={{
-                background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(232, 201, 122, 0.9) 100%)',
-                color: '#FFF9FB',
+                background: 'linear-gradient(135deg, #D4AF37 0%, #E8C97A 100%)',
+                color: '#0a0a0a',
                 border: '1px solid rgba(255, 255, 255, 0.3)'
               }}
             >
@@ -129,12 +132,13 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
 
         {/* Stock Status Overlay */}
         {(!product.available || !hasAnyStock) && (
-          <div className="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center">
             <span
               className="px-4 py-2 text-xs font-semibold rounded-full"
               style={{
-                background: 'linear-gradient(135deg, #2E2E2E 0%, #4A4A4A 100%)',
-                color: '#FFF9FB'
+                backgroundColor: '#2a2a2a',
+                color: '#A3A3A3',
+                border: '1px solid rgba(163, 163, 163, 0.3)'
               }}
             >
               {!product.available ? 'Unavailable' : 'Out of Stock'}
@@ -145,7 +149,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
 
       {/* Product Details */}
       <div className="p-4 flex-1 flex flex-col">
-        <h3 className="font-semibold text-theme-text mb-1 line-clamp-2 font-playfair">{product.name}</h3>
+        <h3 className="font-semibold text-white mb-1 line-clamp-2 font-playfair">{product.name}</h3>
         <p className="text-sm text-neutral-500 mb-3 line-clamp-2 min-h-[2.5rem]">{product.description}</p>
 
         {/* Variations (Sizes) */}
@@ -168,20 +172,20 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
                     className="px-2 py-1 text-xs rounded-lg transition-all duration-300 relative z-20"
                     style={{
                       background: isSelected
-                        ? 'linear-gradient(135deg, #D18CA3 0%, #C47A91 100%)'
+                        ? 'linear-gradient(135deg, #D4AF37 0%, #B8972F 100%)'
                         : isOutOfStock
-                          ? '#F6E1E7'
-                          : '#FFF9FB',
+                          ? '#252525'
+                          : 'transparent',
                       color: isSelected
-                        ? '#FFF9FB'
+                        ? '#0a0a0a'
                         : isOutOfStock
-                          ? '#C9B4BA'
-                          : '#2E2E2E',
+                          ? '#525252'
+                          : '#D4AF37',
                       border: isSelected
                         ? '1px solid #D4AF37'
                         : isOutOfStock
-                          ? '1px solid #E5D6D9'
-                          : '1px solid #D4AF37',
+                          ? '1px solid #333'
+                          : '1px solid rgba(212, 175, 55, 0.4)',
                       cursor: isOutOfStock ? 'not-allowed' : 'pointer',
                       opacity: isOutOfStock ? 0.6 : 1,
                     }}
@@ -191,7 +195,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
                 );
               })}
               {product.variations.length > 3 && (
-                <span className="text-xs text-neutral-400 self-center">
+                <span className="text-xs text-neutral-500 self-center">
                   +{product.variations.length - 3}
                 </span>
               )}
@@ -207,7 +211,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
             <div className="flex flex-col gap-1">
               {/* Original Price - Strikethrough */}
               <div className="flex items-center gap-2">
-                <span className="text-base text-neutral-400 line-through font-medium">
+                <span className="text-base text-neutral-500 line-through font-medium">
                   ₱{originalPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
                 </span>
                 <span
@@ -246,19 +250,19 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
             {/* Quantity Controls */}
             <div
               className="flex items-center rounded-lg flex-shrink-0"
-              style={{ border: '1px solid rgba(212, 175, 55, 0.4)' }}
+              style={{ border: '1px solid rgba(212, 175, 55, 0.4)', backgroundColor: '#252525' }}
             >
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   decrementQuantity();
                 }}
-                className="p-1 sm:p-1.5 hover:bg-blush-50 transition-colors rounded-l-lg"
+                className="p-1 sm:p-1.5 hover:bg-neutral-700 transition-colors rounded-l-lg"
                 disabled={!hasAnyStock || !product.available}
               >
-                <Minus className="w-3 h-3 sm:w-4 sm:h-4 text-neutral-500" />
+                <Minus className="w-3 h-3 sm:w-4 sm:h-4 text-neutral-400" />
               </button>
-              <span className="w-6 sm:w-8 text-center text-xs sm:text-sm font-medium text-theme-text">
+              <span className="w-6 sm:w-8 text-center text-xs sm:text-sm font-medium text-white">
                 {quantity}
               </span>
               <button
@@ -266,10 +270,10 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
                   e.stopPropagation();
                   incrementQuantity();
                 }}
-                className="p-1 sm:p-1.5 hover:bg-blush-50 transition-colors rounded-r-lg"
+                className="p-1 sm:p-1.5 hover:bg-neutral-700 transition-colors rounded-r-lg"
                 disabled={quantity >= availableStock || !hasAnyStock || !product.available}
               >
-                <Plus className="w-3 h-3 sm:w-4 sm:h-4 text-neutral-500" />
+                <Plus className="w-3 h-3 sm:w-4 sm:h-4 text-neutral-400" />
               </button>
             </div>
 
@@ -287,19 +291,18 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
               disabled={!hasAnyStock || availableStock === 0 || !product.available}
               className="flex-1 min-w-0 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1 sm:gap-2"
               style={{
-                background: 'linear-gradient(135deg, #D18CA3 0%, #C47A91 100%)',
-                color: '#D4AF37',
-                border: '1px solid rgba(212, 175, 55, 0.3)',
+                background: 'linear-gradient(135deg, #D4AF37 0%, #B8972F 100%)',
+                color: '#0a0a0a',
               }}
               onMouseEnter={(e) => {
                 if (!e.currentTarget.disabled) {
-                  e.currentTarget.style.background = 'linear-gradient(135deg, #C47A91 0%, #B0677D 100%)';
-                  e.currentTarget.style.color = '#E8C97A';
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #E8C97A 0%, #D4AF37 100%)';
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(212, 175, 55, 0.4)';
                 }
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, #D18CA3 0%, #C47A91 100%)';
-                e.currentTarget.style.color = '#D4AF37';
+                e.currentTarget.style.background = 'linear-gradient(135deg, #D4AF37 0%, #B8972F 100%)';
+                e.currentTarget.style.boxShadow = 'none';
               }}
             >
               <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />

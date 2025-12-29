@@ -59,7 +59,7 @@ const Menu: React.FC<MenuProps> = ({ menuItems, addToCart, cartItems }) => {
         />
       )}
 
-      <div className="min-h-screen bg-theme-bg">
+      <div className="min-h-screen" style={{ backgroundColor: '#0a0a0a' }}>
         <Hero
           onShopAll={() => {
             productsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -77,59 +77,72 @@ const Menu: React.FC<MenuProps> = ({ menuItems, addToCart, cartItems }) => {
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 text-base rounded-xl focus:outline-none transition-all bg-white"
+                className="w-full pl-12 pr-4 py-3 text-base rounded-xl focus:outline-none transition-all"
                 style={{
-                  border: '2px solid rgba(212, 175, 55, 0.4)',
-                  boxShadow: '0 4px 16px rgba(212, 175, 55, 0.08)'
+                  backgroundColor: '#1a1a1a',
+                  border: '2px solid rgba(212, 175, 55, 0.3)',
+                  color: '#F5F5F5',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)'
                 }}
                 onFocus={(e) => {
                   e.currentTarget.style.borderColor = '#D4AF37';
-                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(212, 175, 55, 0.15)';
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(212, 175, 55, 0.2)';
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.4)';
-                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(212, 175, 55, 0.08)';
+                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.3)';
+                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.3)';
                 }}
               />
             </div>
 
             {/* Sort Dropdown */}
             <div
-              className="flex items-center gap-3 sm:w-auto bg-white rounded-xl px-4 py-3"
+              className="flex items-center gap-3 sm:w-auto rounded-xl px-4 py-3"
               style={{
-                border: '2px solid rgba(212, 175, 55, 0.4)',
-                boxShadow: '0 4px 16px rgba(212, 175, 55, 0.08)'
+                backgroundColor: '#1a1a1a',
+                border: '2px solid rgba(212, 175, 55, 0.3)',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)'
               }}
             >
               <Filter className="w-5 h-5" style={{ color: '#D4AF37' }} />
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as 'name' | 'price' | 'purity')}
-                className="focus:outline-none bg-transparent font-medium text-theme-text text-sm"
+                className="focus:outline-none bg-transparent font-medium text-sm"
+                style={{ color: '#F5F5F5' }}
               >
-                <option value="name">Sort by Name</option>
-                <option value="price">Sort by Price</option>
-                <option value="purity">Sort by Purity</option>
+                <option value="name" style={{ backgroundColor: '#1a1a1a' }}>Sort by Name</option>
+                <option value="price" style={{ backgroundColor: '#1a1a1a' }}>Sort by Price</option>
+                <option value="purity" style={{ backgroundColor: '#1a1a1a' }}>Sort by Purity</option>
               </select>
             </div>
           </div>
 
           {/* Results Count */}
           <div className="mb-6 flex items-center gap-2">
-            <p className="text-gray-500 font-medium text-sm">
-              Showing <span className="font-bold text-theme-text">{sortedProducts.length}</span> products
+            <p className="text-neutral-500 font-medium text-sm">
+              Showing <span className="font-bold text-gold">{sortedProducts.length}</span> products
             </p>
           </div>
 
           {/* Products Grid */}
           {sortedProducts.length === 0 ? (
             <div className="text-center py-20">
-              <div className="bg-white rounded-xl shadow-soft p-12 max-w-md mx-auto border border-gray-100">
-                <div className="bg-gray-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Package className="w-10 h-10 text-gray-400" />
+              <div
+                className="rounded-xl p-12 max-w-md mx-auto"
+                style={{
+                  backgroundColor: '#1a1a1a',
+                  border: '1px solid rgba(212, 175, 55, 0.2)'
+                }}
+              >
+                <div
+                  className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
+                  style={{ backgroundColor: '#252525' }}
+                >
+                  <Package className="w-10 h-10 text-neutral-600" />
                 </div>
-                <h3 className="text-xl font-bold text-theme-text mb-2">No products found</h3>
-                <p className="text-gray-500 mb-6">
+                <h3 className="text-xl font-bold text-white mb-2">No products found</h3>
+                <p className="text-neutral-500 mb-6">
                   {searchQuery
                     ? `No products match "${searchQuery}".`
                     : 'No products available.'}

@@ -7,28 +7,38 @@ export default {
   theme: {
     extend: {
       colors: {
-        // PepQueen Royal Feminine Luxury Theme
-        'theme-bg': '#F6E1E7',           // Soft Blush Pink - Main Background
-        'theme-text': '#2E2E2E',         // Soft Charcoal Text
-        'theme-accent': '#D18CA3',       // Dusty Rose - Primary Brand Pink
-        'theme-accent-hover': '#C47A91', // Dusty Rose hover state
-        'theme-secondary': '#FFF9FB',    // Warm White
-        'text-secondary': '#4A4A4A',     // Secondary text
+        // PepQueen Dark Luxury Theme
+        'theme-bg': '#0a0a0a',           // Deep Black Background
+        'theme-text': '#F5F5F5',         // Light Text
+        'theme-accent': '#D4AF37',       // Gold - Primary Accent
+        'theme-accent-hover': '#E8C97A', // Gold hover state
+        'theme-secondary': '#1a1a1a',    // Slightly Lighter Black
+        'text-secondary': '#A0A0A0',     // Muted text
 
-        // Gold Accents (use sparingly - like jewelry)
+        // Gold Accents (Primary Brand Color)
         gold: {
           DEFAULT: '#D4AF37',  // Royal Metallic Gold
           light: '#E8C97A',    // Soft Champagne Gold
           dark: '#B8972F',     // Deeper gold for contrast
+          50: '#FDF9E8',
+          100: '#FAF0C8',
+          200: '#F5E08F',
+          300: '#EFCE56',
+          400: '#E8C97A',
+          500: '#D4AF37',
+          600: '#B8972F',
+          700: '#9A7C26',
+          800: '#7C621E',
+          900: '#5E4A16',
         },
 
-        // Dusty Rose Scale (Primary Brand Color)
+        // Dusty Rose Scale (Secondary accent)
         rose: {
           50: '#FDF5F7',
           100: '#FBE8EC',
           200: '#F5CCD6',
           300: '#ECAABB',
-          400: '#D18CA3',  // Primary dusty rose
+          400: '#D18CA3',
           500: '#C47A91',
           600: '#B0677D',
           700: '#935566',
@@ -36,74 +46,60 @@ export default {
           900: '#633A44',
         },
 
-        // Blush Pink Scale (Backgrounds)
-        blush: {
-          50: '#FFF9FB',   // Warm white
-          100: '#F6E1E7',  // Main blush background
-          200: '#F0CDD8',
-          300: '#E8B5C6',
-          400: '#DD96AC',
-          500: '#D18CA3',
-          600: '#C47A91',
-          700: '#A86175',
-          800: '#8C4E5E',
-          900: '#734049',
+        // Dark Scale
+        dark: {
+          50: '#2a2a2a',
+          100: '#252525',
+          200: '#202020',
+          300: '#1a1a1a',
+          400: '#151515',
+          500: '#101010',
+          600: '#0d0d0d',
+          700: '#0a0a0a',
+          800: '#050505',
+          900: '#000000',
         },
 
-        // Neutrals (Luxury Balance)
+        // Neutrals (Dark Theme)
         neutral: {
-          50: '#FFF9FB',   // Warm White
-          100: '#F6E1E7',  // Soft Blush
-          200: '#F3ECE8',  // Light Nude Beige
-          300: '#E5D6D9',
-          400: '#C9B4BA',
-          500: '#A8919A',
-          600: '#7A6970',
-          700: '#2E2E2E',  // Charcoal
-          800: '#232323',
-          900: '#1A1A1A',
+          50: '#FAFAFA',
+          100: '#F5F5F5',
+          200: '#E5E5E5',
+          300: '#D4D4D4',
+          400: '#A3A3A3',
+          500: '#737373',
+          600: '#525252',
+          700: '#404040',
+          800: '#262626',
+          900: '#171717',
         },
 
-        // Primary scale mapped to dusty rose for compatibility
+        // Primary scale mapped to gold for compatibility
         primary: {
-          50: '#FDF5F7',
-          100: '#FBE8EC',
-          200: '#F5CCD6',
-          300: '#ECAABB',
-          400: '#D18CA3',
-          500: '#C47A91',
-          600: '#B0677D',
-          700: '#935566',
-          800: '#784551',
-          900: '#633A44',
+          50: '#FDF9E8',
+          100: '#FAF0C8',
+          200: '#F5E08F',
+          300: '#EFCE56',
+          400: '#E8C97A',
+          500: '#D4AF37',
+          600: '#B8972F',
+          700: '#9A7C26',
+          800: '#7C621E',
+          900: '#5E4A16',
         },
 
-        // Purple kept for compatibility (mapped to rose tones)
-        purple: {
-          50: '#FDF5F7',
-          100: '#FBE8EC',
-          200: '#F5CCD6',
-          300: '#ECAABB',
-          400: '#D18CA3',
-          500: '#C47A91',
-          600: '#B0677D',
-          700: '#935566',
-          800: '#784551',
-          900: '#633A44',
-        },
-
-        // Pink mapped to rose palette
-        pink: {
-          50: '#FDF5F7',
-          100: '#FBE8EC',
-          200: '#F5CCD6',
-          300: '#ECAABB',
-          400: '#D18CA3',
-          500: '#C47A91',
-          600: '#B0677D',
-          700: '#935566',
-          800: '#784551',
-          900: '#633A44',
+        // Blush kept for compatibility
+        blush: {
+          50: '#1a1a1a',
+          100: '#252525',
+          200: '#2a2a2a',
+          300: '#333333',
+          400: '#404040',
+          500: '#525252',
+          600: '#666666',
+          700: '#808080',
+          800: '#999999',
+          900: '#B3B3B3',
         },
 
         // Sage kept for subtle accents
@@ -120,13 +116,22 @@ export default {
           900: '#2E4B3F',
         },
 
+        // Navy for admin/dark accents
+        navy: {
+          50: '#1a1a1a',
+          100: '#252525',
+          200: '#2a2a2a',
+          800: '#151515',
+          900: '#0a0a0a',
+        },
+
         // Accent colors for quick access
         accent: {
           light: '#E8C97A',      // Champagne gold
           DEFAULT: '#D4AF37',    // Metallic gold
           dark: '#B8972F',
-          white: '#FFF9FB',      // Warm white
-          black: '#2E2E2E',      // Charcoal
+          white: '#F5F5F5',      // Light text
+          black: '#0a0a0a',      // Deep black
         },
       },
       fontFamily: {
@@ -147,13 +152,14 @@ export default {
         'brand-xl': '20px',
       },
       boxShadow: {
-        'soft': '0 2px 12px rgba(209, 140, 163, 0.08)',
-        'medium': '0 4px 20px rgba(209, 140, 163, 0.12)',
-        'hover': '0 8px 30px rgba(209, 140, 163, 0.15)',
-        'card': '0 1px 4px rgba(209, 140, 163, 0.06), 0 2px 8px rgba(209, 140, 163, 0.04)',
-        'gold': '0 4px 20px rgba(212, 175, 55, 0.20)',
+        'soft': '0 2px 12px rgba(0, 0, 0, 0.3)',
+        'medium': '0 4px 20px rgba(0, 0, 0, 0.4)',
+        'hover': '0 8px 30px rgba(0, 0, 0, 0.5)',
+        'card': '0 1px 4px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.15)',
+        'gold': '0 4px 20px rgba(212, 175, 55, 0.25)',
         'rose': '0 4px 20px rgba(209, 140, 163, 0.20)',
-        'luxury': '0 8px 40px rgba(209, 140, 163, 0.12), 0 2px 8px rgba(212, 175, 55, 0.08)',
+        'luxury': '0 8px 40px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(212, 175, 55, 0.1)',
+        'glow-gold': '0 0 30px rgba(212, 175, 55, 0.3)',
       },
       transitionDuration: {
         '400': '400ms',

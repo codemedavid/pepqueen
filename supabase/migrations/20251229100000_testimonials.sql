@@ -17,6 +17,10 @@ CREATE INDEX IF NOT EXISTS idx_testimonials_order ON testimonials(display_order)
 -- Enable RLS
 ALTER TABLE testimonials ENABLE ROW LEVEL SECURITY;
 
+-- Drop existing policies if they exist (for re-running migrations)
+DROP POLICY IF EXISTS "Allow public read access to active testimonials" ON testimonials;
+DROP POLICY IF EXISTS "Allow all operations for authenticated users" ON testimonials;
+
 -- Create policies
 CREATE POLICY "Allow public read access to active testimonials"
     ON testimonials FOR SELECT
@@ -37,10 +41,16 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- Drop trigger if exists before creating
+DROP TRIGGER IF EXISTS trigger_update_testimonials_updated_at ON testimonials;
+
 CREATE TRIGGER trigger_update_testimonials_updated_at
     BEFORE UPDATE ON testimonials
     FOR EACH ROW
     EXECUTE FUNCTION update_testimonials_updated_at();
+
+-- Clear existing testimonials and insert fresh data
+DELETE FROM testimonials;
 
 -- Insert real testimonials
 INSERT INTO testimonials (title, description, image_url, display_order) VALUES

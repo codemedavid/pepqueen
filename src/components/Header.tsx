@@ -14,7 +14,13 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
 
   return (
     <>
-      <header className="bg-white/95 backdrop-blur-sm sticky top-0 z-50 shadow-soft" style={{ borderBottom: '1px solid rgba(212, 175, 55, 0.15)' }}>
+      <header
+        className="backdrop-blur-md sticky top-0 z-50 shadow-sm"
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.98)',
+          borderBottom: '1px solid rgba(212, 175, 55, 0.3)'
+        }}
+      >
         <div className="container mx-auto px-4 md:px-6 py-2 md:py-3">
           <div className="flex items-center justify-between gap-4">
             {/* Logo Only - No Text */}
@@ -42,20 +48,20 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
               <nav className="hidden md:flex items-center gap-2 lg:gap-4">
                 <button
                   onClick={onMenuClick}
-                  className="text-sm font-medium text-neutral-600 hover:text-rose-400 transition-colors"
+                  className="text-sm font-medium text-neutral-600 hover:text-gold transition-colors"
                 >
                   Products
                 </button>
                 <a
                   href="/track-order"
-                  className="text-sm font-medium text-neutral-600 hover:text-rose-400 transition-colors flex items-center gap-1"
+                  className="text-sm font-medium text-neutral-600 hover:text-gold transition-colors flex items-center gap-1"
                 >
                   <Truck className="w-4 h-4" />
                   Track Order
                 </a>
                 <a
                   href="/calculator"
-                  className="text-sm font-medium text-neutral-600 hover:text-rose-400 transition-colors flex items-center gap-1"
+                  className="text-sm font-medium text-neutral-600 hover:text-gold transition-colors flex items-center gap-1"
                 >
                   <Calculator className="w-4 h-4" />
                   Calculator
@@ -63,7 +69,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                 {coaPageEnabled && (
                   <a
                     href="/coa"
-                    className="text-sm font-medium text-neutral-600 hover:text-rose-400 transition-colors flex items-center gap-1"
+                    className="text-sm font-medium text-neutral-600 hover:text-gold transition-colors flex items-center gap-1"
                   >
                     <FileText className="w-4 h-4" />
                     Lab Tests
@@ -71,21 +77,21 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                 )}
                 <a
                   href="/faq"
-                  className="text-sm font-medium text-neutral-600 hover:text-rose-400 transition-colors flex items-center gap-1"
+                  className="text-sm font-medium text-neutral-600 hover:text-gold transition-colors flex items-center gap-1"
                 >
                   <HelpCircle className="w-4 h-4" />
                   FAQ
                 </a>
                 <a
                   href="/assessment"
-                  className="text-sm font-medium text-neutral-600 hover:text-rose-400 transition-colors flex items-center gap-1"
+                  className="text-sm font-medium text-neutral-600 hover:text-gold transition-colors flex items-center gap-1"
                 >
                   <ClipboardCheck className="w-4 h-4" />
                   Assessment
                 </a>
                 <a
                   href="/testimonials"
-                  className="text-sm font-medium text-neutral-600 hover:text-rose-400 transition-colors flex items-center gap-1"
+                  className="text-sm font-medium text-neutral-600 hover:text-gold transition-colors flex items-center gap-1"
                 >
                   <Users className="w-4 h-4" />
                   Reviews
@@ -94,7 +100,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                   href="https://t.me/+k3SfL4WjnMQ3NGRl"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm font-medium text-neutral-600 hover:text-[#0088cc] transition-colors flex items-center gap-1"
+                  className="text-sm font-medium text-neutral-400 hover:text-[#0088cc] transition-colors flex items-center gap-1"
                 >
                   <MessageCircle className="w-4 h-4" />
                   Join Community
@@ -104,15 +110,15 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
               {/* Cart Button */}
               <button
                 onClick={onCartClick}
-                className="relative p-2 text-theme-text hover:text-rose-400 transition-colors"
+                className="relative p-2 text-neutral-600 hover:text-gold transition-colors"
               >
                 <ShoppingCart className="w-6 h-6" />
                 {cartItemsCount > 0 && (
                   <span
-                    className="absolute -top-1 -right-1 text-white text-[11px] font-bold rounded-full min-w-[20px] h-5 flex items-center justify-center px-1 shadow-sm"
+                    className="absolute -top-1 -right-1 text-black text-[11px] font-bold rounded-full min-w-[20px] h-5 flex items-center justify-center px-1"
                     style={{
-                      background: 'linear-gradient(135deg, #D18CA3 0%, #C47A91 100%)',
-                      border: '1px solid rgba(212, 175, 55, 0.3)'
+                      background: 'linear-gradient(135deg, #D4AF37 0%, #E8C97A 100%)',
+                      border: '1px solid rgba(212, 175, 55, 0.5)'
                     }}
                   >
                     {cartItemsCount > 99 ? '99+' : cartItemsCount}
@@ -123,7 +129,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 text-theme-text hover:text-rose-400 transition-colors"
+                className="md:hidden p-2 text-neutral-600 hover:text-gold transition-colors"
                 aria-label="Toggle menu"
               >
                 {mobileMenuOpen ? (
@@ -142,18 +148,27 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
         <div className="md:hidden fixed inset-0 z-[60]">
           {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-neutral-900/40 backdrop-blur-sm transition-opacity"
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
             onClick={() => setMobileMenuOpen(false)}
           />
 
           {/* Sidebar Drawer */}
           <div
-            className="absolute top-0 right-0 bottom-0 w-[280px] bg-white shadow-2xl flex flex-col animate-in slide-in-from-right duration-300"
-            style={{ borderLeft: '1px solid rgba(212, 175, 55, 0.2)' }}
+            className="absolute top-0 right-0 bottom-0 w-[280px] flex flex-col animate-in slide-in-from-right duration-300"
+            style={{
+              backgroundColor: '#0a0a0a',
+              borderLeft: '1px solid rgba(212, 175, 55, 0.2)'
+            }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Drawer Header with Logo */}
-            <div className="flex items-center justify-between p-4 bg-white" style={{ borderBottom: '1px solid rgba(212, 175, 55, 0.15)' }}>
+            <div
+              className="flex items-center justify-between p-4"
+              style={{
+                backgroundColor: '#0a0a0a',
+                borderBottom: '1px solid rgba(212, 175, 55, 0.15)'
+              }}
+            >
               <div className="h-10 rounded-lg overflow-hidden" style={{ border: '1px solid rgba(212, 175, 55, 0.3)' }}>
                 <img
                   src="/assets/logo.jpg"
@@ -163,24 +178,27 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
               </div>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2 -mr-2 text-neutral-500 hover:text-rose-400 transition-colors rounded-full hover:bg-blush-50"
+                className="p-2 -mr-2 text-neutral-500 hover:text-gold transition-colors rounded-full"
               >
                 <X className="w-6 h-6" />
               </button>
             </div>
 
             {/* Navigation Items */}
-            <nav className="flex-1 overflow-y-auto p-4 bg-white">
+            <nav className="flex-1 overflow-y-auto p-4" style={{ backgroundColor: '#0a0a0a' }}>
               <div className="flex flex-col space-y-2">
                 <button
                   onClick={() => {
                     onMenuClick();
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-theme-text hover:bg-blush-50 hover:text-rose-500 transition-all group"
+                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-neutral-300 hover:text-gold hover:bg-neutral-900 transition-all group"
                 >
-                  <div className="p-2 rounded-brand bg-blush-50 group-hover:bg-white group-hover:shadow-sm transition-all" style={{ border: '1px solid rgba(209, 140, 163, 0.2)' }}>
-                    <span className="w-5 h-5 text-rose-400">
+                  <div
+                    className="p-2 rounded-brand transition-all"
+                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', border: '1px solid rgba(212, 175, 55, 0.2)' }}
+                  >
+                    <span className="w-5 h-5 text-gold">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                     </span>
                   </div>
@@ -188,55 +206,73 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                 </button>
                 <a
                   href="/track-order"
-                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-theme-text hover:bg-blush-50 hover:text-rose-500 transition-all group"
+                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-neutral-300 hover:text-gold hover:bg-neutral-900 transition-all group"
                 >
-                  <div className="p-2 rounded-brand bg-blush-50 group-hover:bg-white group-hover:shadow-sm transition-all" style={{ border: '1px solid rgba(209, 140, 163, 0.2)' }}>
-                    <Truck className="w-5 h-5 text-rose-400" />
+                  <div
+                    className="p-2 rounded-brand transition-all"
+                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', border: '1px solid rgba(212, 175, 55, 0.2)' }}
+                  >
+                    <Truck className="w-5 h-5 text-gold" />
                   </div>
                   Track Order
                 </a>
                 <a
                   href="/calculator"
-                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-theme-text hover:bg-blush-50 hover:text-rose-500 transition-all group"
+                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-neutral-300 hover:text-gold hover:bg-neutral-900 transition-all group"
                 >
-                  <div className="p-2 rounded-brand bg-sage-50 group-hover:bg-white group-hover:shadow-sm transition-all" style={{ border: '1px solid rgba(140, 191, 168, 0.2)' }}>
-                    <Calculator className="w-5 h-5 text-sage-500" />
+                  <div
+                    className="p-2 rounded-brand transition-all"
+                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', border: '1px solid rgba(212, 175, 55, 0.2)' }}
+                  >
+                    <Calculator className="w-5 h-5 text-gold" />
                   </div>
                   Peptide Calculator
                 </a>
                 <a
                   href="/coa"
-                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-theme-text hover:bg-blush-50 hover:text-rose-500 transition-all group"
+                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-neutral-300 hover:text-gold hover:bg-neutral-900 transition-all group"
                 >
-                  <div className="p-2 rounded-brand bg-blush-50 group-hover:bg-white group-hover:shadow-sm transition-all" style={{ border: '1px solid rgba(209, 140, 163, 0.2)' }}>
-                    <FileText className="w-5 h-5 text-rose-400" />
+                  <div
+                    className="p-2 rounded-brand transition-all"
+                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', border: '1px solid rgba(212, 175, 55, 0.2)' }}
+                  >
+                    <FileText className="w-5 h-5 text-gold" />
                   </div>
                   Lab Tests (COA)
                 </a>
                 <a
                   href="/faq"
-                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-theme-text hover:bg-blush-50 hover:text-rose-500 transition-all group"
+                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-neutral-300 hover:text-gold hover:bg-neutral-900 transition-all group"
                 >
-                  <div className="p-2 rounded-brand bg-sage-50 group-hover:bg-white group-hover:shadow-sm transition-all" style={{ border: '1px solid rgba(140, 191, 168, 0.2)' }}>
-                    <HelpCircle className="w-5 h-5 text-sage-500" />
+                  <div
+                    className="p-2 rounded-brand transition-all"
+                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', border: '1px solid rgba(212, 175, 55, 0.2)' }}
+                  >
+                    <HelpCircle className="w-5 h-5 text-gold" />
                   </div>
                   FAQ
                 </a>
                 <a
                   href="/assessment"
-                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-theme-text hover:bg-blush-50 hover:text-rose-500 transition-all group"
+                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-neutral-300 hover:text-gold hover:bg-neutral-900 transition-all group"
                 >
-                  <div className="p-2 rounded-brand bg-blush-50 group-hover:bg-white group-hover:shadow-sm transition-all" style={{ border: '1px solid rgba(209, 140, 163, 0.2)' }}>
-                    <ClipboardCheck className="w-5 h-5 text-rose-400" />
+                  <div
+                    className="p-2 rounded-brand transition-all"
+                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', border: '1px solid rgba(212, 175, 55, 0.2)' }}
+                  >
+                    <ClipboardCheck className="w-5 h-5 text-gold" />
                   </div>
                   Assessment
                 </a>
                 <a
                   href="/testimonials"
-                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-theme-text hover:bg-blush-50 hover:text-rose-500 transition-all group"
+                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-neutral-300 hover:text-gold hover:bg-neutral-900 transition-all group"
                 >
-                  <div className="p-2 rounded-brand bg-sage-50 group-hover:bg-white group-hover:shadow-sm transition-all" style={{ border: '1px solid rgba(140, 191, 168, 0.2)' }}>
-                    <Users className="w-5 h-5 text-sage-500" />
+                  <div
+                    className="p-2 rounded-brand transition-all"
+                    style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', border: '1px solid rgba(212, 175, 55, 0.2)' }}
+                  >
+                    <Users className="w-5 h-5 text-gold" />
                   </div>
                   Customer Reviews
                 </a>
@@ -244,10 +280,13 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                   href="https://t.me/+k3SfL4WjnMQ3NGRl"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-theme-text hover:bg-blush-50 hover:text-rose-500 transition-all group"
+                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-neutral-300 hover:text-[#0088cc] hover:bg-neutral-900 transition-all group"
                 >
-                  <div className="p-2 rounded-brand bg-blush-50 group-hover:bg-white group-hover:shadow-sm transition-all" style={{ border: '1px solid rgba(209, 140, 163, 0.2)' }}>
-                    <MessageCircle className="w-5 h-5 text-rose-400" />
+                  <div
+                    className="p-2 rounded-brand transition-all"
+                    style={{ backgroundColor: 'rgba(0, 136, 204, 0.1)', border: '1px solid rgba(0, 136, 204, 0.2)' }}
+                  >
+                    <MessageCircle className="w-5 h-5 text-[#0088cc]" />
                   </div>
                   Join Community
                 </a>

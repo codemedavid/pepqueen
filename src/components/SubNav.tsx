@@ -20,11 +20,14 @@ const SubNav: React.FC<SubNavProps> = ({ selectedCategory, onCategoryClick }) =>
 
   if (loading) {
     return (
-      <div className="bg-white shadow-sm border-b border-gray-100 hidden md:block">
+      <div
+        className="hidden md:block"
+        style={{ backgroundColor: '#0a0a0a', borderBottom: '1px solid rgba(212, 175, 55, 0.2)' }}
+      >
         <div className="container mx-auto px-4 py-4">
           <div className="flex space-x-3 overflow-x-auto">
             {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="animate-pulse bg-gray-100 h-10 w-32 rounded-lg" />
+              <div key={i} className="animate-pulse h-10 w-32 rounded-lg" style={{ backgroundColor: '#1a1a1a' }} />
             ))}
           </div>
         </div>
@@ -33,7 +36,13 @@ const SubNav: React.FC<SubNavProps> = ({ selectedCategory, onCategoryClick }) =>
   }
 
   return (
-    <nav className="bg-white shadow-sm sticky top-[64px] md:top-[80px] lg:top-[88px] z-40 border-b-4 border-navy-900">
+    <nav
+      className="sticky top-[64px] md:top-[80px] lg:top-[88px] z-40"
+      style={{
+        backgroundColor: '#0a0a0a',
+        borderBottom: '2px solid rgba(212, 175, 55, 0.3)'
+      }}
+    >
       <div className="container mx-auto px-4">
         <div className="flex items-center space-x-2 py-4 overflow-x-auto scrollbar-hide">
           {categories.map((category) => {
@@ -46,15 +55,39 @@ const SubNav: React.FC<SubNavProps> = ({ selectedCategory, onCategoryClick }) =>
                 className={`
                   flex items-center space-x-2 px-4 py-2 rounded-lg font-medium whitespace-nowrap
                   transition-all duration-200 text-sm border
-                  ${isSelected
-                    ? 'bg-navy-900 text-white border-navy-900 shadow-sm'
-                    : 'bg-white text-gray-600 hover:text-navy-900 border-navy-900 hover:bg-gray-50'
-                  }
                 `}
+                style={
+                  isSelected
+                    ? {
+                      background: 'linear-gradient(135deg, #D4AF37 0%, #B8972F 100%)',
+                      color: '#0a0a0a',
+                      borderColor: '#D4AF37',
+                      boxShadow: '0 4px 12px rgba(212, 175, 55, 0.3)'
+                    }
+                    : {
+                      backgroundColor: 'transparent',
+                      color: '#A3A3A3',
+                      borderColor: 'rgba(212, 175, 55, 0.3)'
+                    }
+                }
+                onMouseEnter={(e) => {
+                  if (!isSelected) {
+                    e.currentTarget.style.borderColor = '#D4AF37';
+                    e.currentTarget.style.color = '#D4AF37';
+                    e.currentTarget.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isSelected) {
+                    e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.3)';
+                    e.currentTarget.style.color = '#A3A3A3';
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }
+                }}
               >
                 <span>
                   {React.cloneElement(iconMap[category.icon] || <Grid className="w-4 h-4" />, {
-                    className: `w-4 h-4 ${isSelected ? 'text-white' : 'text-gray-400 group-hover:text-theme-text'}`
+                    className: `w-4 h-4 ${isSelected ? 'text-current' : ''}`
                   })}
                 </span>
                 <span>{category.name}</span>

@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   const { coaPageEnabled } = useCOAPageSetting();
 
   return (
-    <footer className="bg-white pt-12 pb-6" style={{ borderTop: '1px solid rgba(212, 175, 55, 0.2)' }}>
+    <footer style={{ backgroundColor: '#0a0a0a', borderTop: '1px solid rgba(212, 175, 55, 0.2)' }} className="pt-12 pb-6">
       {/* Gold accent line */}
       <div className="w-full h-[1px] mb-12" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.4) 30%, rgba(212, 175, 55, 0.4) 70%, transparent 100%)' }} />
 
@@ -31,11 +31,11 @@ const Footer: React.FC = () => {
           {/* Contact Emails */}
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-sm text-neutral-500">
             <span className="text-xs font-medium uppercase" style={{ color: '#D4AF37' }}>Contact Us:</span>
-            <a href="mailto:peptidewhisperer@gmail.com" className="hover:text-rose-400 transition-colors">
+            <a href="mailto:peptidewhisperer@gmail.com" className="hover:text-gold transition-colors">
               peptidewhisperer@gmail.com
             </a>
-            <span className="hidden sm:inline text-blush-300">|</span>
-            <a href="mailto:thepeptidepulse@gmail.com" className="hover:text-rose-400 transition-colors">
+            <span className="hidden sm:inline text-neutral-700">|</span>
+            <a href="mailto:thepeptidepulse@gmail.com" className="hover:text-gold transition-colors">
               thepeptidepulse@gmail.com
             </a>
           </div>
@@ -44,14 +44,14 @@ const Footer: React.FC = () => {
           <div className="flex flex-wrap items-center gap-4 justify-center md:justify-end">
             <a
               href="/track-order"
-              className="text-neutral-500 hover:text-rose-400 transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-neutral-500 hover:text-gold transition-colors flex items-center gap-2 text-sm font-medium"
             >
               <Truck className="w-4 h-4" />
               Track Order
             </a>
             <a
               href="/calculator"
-              className="text-neutral-500 hover:text-sage-500 transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-neutral-500 hover:text-gold transition-colors flex items-center gap-2 text-sm font-medium"
             >
               <Calculator className="w-4 h-4" />
               Calculator
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
             {coaPageEnabled && (
               <a
                 href="/coa"
-                className="text-neutral-500 hover:text-rose-400 transition-colors flex items-center gap-2 text-sm font-medium"
+                className="text-neutral-500 hover:text-gold transition-colors flex items-center gap-2 text-sm font-medium"
               >
                 <FileText className="w-4 h-4" />
                 Lab Tests
@@ -67,14 +67,14 @@ const Footer: React.FC = () => {
             )}
             <a
               href="/faq"
-              className="text-neutral-500 hover:text-sage-500 transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-neutral-500 hover:text-gold transition-colors flex items-center gap-2 text-sm font-medium"
             >
               <HelpCircle className="w-4 h-4" />
               FAQ
             </a>
             <a
               href="/assessment"
-              className="text-neutral-500 hover:text-rose-400 transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-neutral-500 hover:text-gold transition-colors flex items-center gap-2 text-sm font-medium"
             >
               <ClipboardCheck className="w-4 h-4" />
               Assessment
@@ -92,7 +92,7 @@ const Footer: React.FC = () => {
               href="https://www.tiktok.com/@peptidepulse20?_r=1&_t=ZS-92SrpIepm5s"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-neutral-500 hover:text-black transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-neutral-500 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -110,9 +110,9 @@ const Footer: React.FC = () => {
 
         {/* Footer Bottom */}
         <div className="pt-6 text-center" style={{ borderTop: '1px solid rgba(212, 175, 55, 0.1)' }}>
-          <p className="text-xs text-neutral-400 flex items-center justify-center gap-2">
+          <p className="text-xs text-neutral-500 flex items-center justify-center gap-2">
             Made with
-            <Heart className="w-3 h-3 text-rose-400 fill-rose-400" />
+            <Heart className="w-3 h-3 text-gold fill-gold" />
             <Sparkles className="w-3 h-3" style={{ color: '#D4AF37' }} />
             © {currentYear} PepQueen.
           </p>
