@@ -71,19 +71,37 @@ const Menu: React.FC<MenuProps> = ({ menuItems, addToCart, cartItems }) => {
           <div className="mb-8 flex flex-col sm:flex-row gap-4">
             {/* Search Bar */}
             <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{ color: '#D4AF37' }} />
               <input
                 type="text"
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 text-base border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-theme-accent focus:border-theme-accent transition-all bg-white"
+                className="w-full pl-12 pr-4 py-3 text-base rounded-xl focus:outline-none transition-all bg-white"
+                style={{
+                  border: '2px solid rgba(212, 175, 55, 0.4)',
+                  boxShadow: '0 4px 16px rgba(212, 175, 55, 0.08)'
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = '#D4AF37';
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(212, 175, 55, 0.15)';
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.4)';
+                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(212, 175, 55, 0.08)';
+                }}
               />
             </div>
 
             {/* Sort Dropdown */}
-            <div className="flex items-center gap-3 sm:w-auto bg-white rounded-lg px-4 py-3 border border-gray-200">
-              <Filter className="text-gray-500 w-5 h-5" />
+            <div
+              className="flex items-center gap-3 sm:w-auto bg-white rounded-xl px-4 py-3"
+              style={{
+                border: '2px solid rgba(212, 175, 55, 0.4)',
+                boxShadow: '0 4px 16px rgba(212, 175, 55, 0.08)'
+              }}
+            >
+              <Filter className="w-5 h-5" style={{ color: '#D4AF37' }} />
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as 'name' | 'price' | 'purity')}

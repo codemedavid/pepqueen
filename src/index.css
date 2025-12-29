@@ -1,34 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=DM+Serif+Display&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Lato:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* ChainForm Brand Theme - Clean Scientific Wellness */
-  --theme-bg: #FAFAFC;
-  --theme-text: #3A3A44;
-  --theme-accent: #6F6AD9;
-  --theme-accent-hover: #5854C7;
-  --theme-secondary: #EEF0F6;
-  --text-secondary: #5A5A64;
+  /* PepQueen Royal Feminine Luxury Theme */
+  --theme-bg: #F6E1E7;
+  /* Soft Blush Pink */
+  --theme-text: #2E2E2E;
+  /* Soft Charcoal */
+  --theme-accent: #D18CA3;
+  /* Dusty Rose */
+  --theme-accent-hover: #C47A91;
+  --theme-secondary: #FFF9FB;
+  /* Warm White */
+  --text-secondary: #4A4A4A;
+
+  /* Gold Accents - use sparingly like jewelry */
+  --gold: #D4AF37;
+  /* Royal Metallic Gold */
+  --gold-light: #E8C97A;
+  /* Soft Champagne */
+  --gold-dark: #B8972F;
 
   /* Brand Colors */
-  --primary-purple: #6F6AD9;
-  --secondary-maroon: #7A3E5C;
-  --accent-blush: #E8A6B8;
-  --accent-sage: #8CBFA8;
-  --background-white: #FAFAFC;
-  --section-gray: #EEF0F6;
-  --text-charcoal: #3A3A44;
+  --primary-rose: #D18CA3;
+  /* Dusty Rose */
+  --blush-bg: #F6E1E7;
+  /* Main Background */
+  --warm-white: #FFF9FB;
+  /* Clean Base */
+  --nude-beige: #F3ECE8;
+  /* Optional accent */
+  --charcoal: #2E2E2E;
+  /* Text */
 
   /* Neutral Scale */
-  --gray-50: #FAFAFC;
-  --gray-100: #EEF0F6;
-  --gray-200: #E5E7EF;
-  --gray-300: #D1D4E0;
-  --gray-500: #7A7F94;
-  --gray-900: #3A3A44;
+  --gray-50: #FFF9FB;
+  --gray-100: #F6E1E7;
+  --gray-200: #F3ECE8;
+  --gray-300: #E5D6D9;
+  --gray-500: #A8919A;
+  --gray-900: #2E2E2E;
 }
 
 * {
@@ -38,50 +52,80 @@
 }
 
 body {
-  font-family: 'Inter', 'IBM Plex Sans', sans-serif;
+  font-family: 'Inter', 'Lato', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--theme-bg);
   color: var(--theme-text);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
+/* Serif Headings - Queen Energy */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
   font-weight: 600;
   color: var(--theme-text);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
 }
 
-/* ChainForm Brand Button Styles */
+/* Royal Feminine Button Styles */
 .btn-primary {
-  @apply bg-purple-500 text-white px-8 py-3 rounded-brand font-medium hover:bg-purple-600 transition-all duration-200 shadow-purple hover:shadow-lg transform hover:-translate-y-0.5;
+  @apply bg-rose-400 text-white px-8 py-3.5 rounded-brand font-medium transition-all duration-300 shadow-rose hover:shadow-luxury transform hover:-translate-y-0.5;
+  background: linear-gradient(135deg, #D18CA3 0%, #C47A91 100%);
 }
 
+.btn-primary:hover {
+  background: linear-gradient(135deg, #C47A91 0%, #B0677D 100%);
+}
+
+/* Gold CTA - Premium */
+.btn-gold {
+  @apply px-8 py-3.5 rounded-brand font-semibold transition-all duration-300 shadow-gold hover:shadow-luxury transform hover:-translate-y-0.5;
+  background: linear-gradient(135deg, #D18CA3 0%, #C47A91 100%);
+  color: #D4AF37;
+  border: 2px solid #D4AF37;
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #C47A91 0%, #B0677D 100%);
+  color: #E8C97A;
+  border-color: #E8C97A;
+}
+
+/* Secondary - Transparent + Gold Outline */
 .btn-secondary {
-  @apply bg-transparent text-purple-500 border-2 border-sage-400 px-6 py-3 rounded-brand font-medium transition-all duration-200 hover:bg-sage-50 hover:border-sage-500 active:scale-[0.98];
+  @apply bg-transparent px-6 py-3 rounded-brand font-medium transition-all duration-300;
+  color: #D4AF37;
+  border: 2px solid #D4AF37;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(212, 175, 55, 0.08);
+  color: #E8C97A;
+  border-color: #E8C97A;
 }
 
 .btn-outline {
-  @apply bg-transparent text-theme-text border border-gray-300 px-4 py-2 rounded-brand font-medium transition-all duration-200 hover:border-purple-400 hover:text-purple-500;
+  @apply bg-transparent text-theme-text border-2 border-rose-200 px-4 py-2 rounded-brand font-medium transition-all duration-300 hover:border-rose-400 hover:text-rose-500;
 }
 
 .btn-sage {
-  @apply bg-sage-400 text-white px-6 py-3 rounded-brand font-medium transition-all duration-200 hover:bg-sage-500 active:scale-[0.98] shadow-sage;
+  @apply bg-sage-400 text-white px-6 py-3 rounded-brand font-medium transition-all duration-300 hover:bg-sage-500 active:scale-[0.98];
 }
 
-/* Minimalist Card Styles */
+/* Luxury Card Styles */
 .card {
-  @apply bg-white rounded-brand-lg shadow-card transition-all duration-200 border border-neutral-100 hover:border-neutral-200;
+  @apply bg-white rounded-brand-lg shadow-card transition-all duration-300 border border-blush-200;
 }
 
 .card-hover {
-  @apply transform transition-all duration-300 hover:-translate-y-1 hover:shadow-medium;
+  @apply transform transition-all duration-400 hover:-translate-y-1 hover:shadow-luxury;
 }
 
 /* Badge Styles */
@@ -89,8 +133,22 @@ h6 {
   @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
 }
 
+.badge-gold {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(232, 201, 122, 0.15) 100%);
+  color: #B8972F;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.badge-rose {
+  @apply bg-rose-50 text-rose-600 border border-rose-100;
+}
+
+.badge-pink {
+  @apply bg-blush-50 text-rose-600 border border-blush-200;
+}
+
 .badge-purple {
-  @apply bg-purple-50 text-purple-600 border border-purple-100;
+  @apply bg-blush-50 text-rose-600 border border-blush-200;
 }
 
 .badge-sage {
@@ -98,27 +156,27 @@ h6 {
 }
 
 .badge-blush {
-  @apply bg-blush-50 text-blush-700 border border-blush-100;
+  @apply bg-blush-50 text-rose-600 border border-blush-100;
 }
 
 .badge-maroon {
-  @apply bg-maroon-50 text-maroon-500 border border-maroon-100;
+  @apply bg-rose-50 text-rose-700 border border-rose-200;
 }
 
 /* Input Styles */
 .input-field {
-  @apply w-full px-4 py-3 border border-neutral-200 rounded-brand focus:outline-none focus:ring-2 focus:ring-purple-200 focus:border-purple-400 transition-all bg-white hover:border-neutral-300;
+  @apply w-full px-4 py-3.5 border border-blush-200 rounded-brand focus:outline-none focus:ring-2 focus:ring-rose-200 focus:border-rose-400 transition-all bg-white hover:border-blush-300;
 }
 
 .input-field:disabled {
-  @apply bg-neutral-50 cursor-not-allowed opacity-70;
+  @apply bg-blush-50 cursor-not-allowed opacity-70;
 }
 
 /* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(12px);
   }
 
   to {
@@ -128,13 +186,13 @@ h6 {
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.6s ease-out;
+  animation: fadeIn 0.8s ease-out;
 }
 
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(-8px);
+    transform: translateX(-12px);
   }
 
   to {
@@ -144,7 +202,7 @@ h6 {
 }
 
 .animate-slideIn {
-  animation: slideIn 0.5s ease-out;
+  animation: slideIn 0.6s ease-out;
 }
 
 @keyframes float {
@@ -155,31 +213,51 @@ h6 {
   }
 
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
   }
 }
 
 .animate-float {
-  animation: float 6s ease-in-out infinite;
+  animation: float 8s ease-in-out infinite;
 }
 
-/* Custom Scrollbar */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(212, 175, 55, 0.3) 50%,
+      transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Custom Scrollbar - Luxury Style */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--gray-100);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--gray-300);
-  border-radius: 3px;
+  background: linear-gradient(135deg, var(--primary-rose) 0%, #C47A91 100%);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--gray-500);
+  background: linear-gradient(135deg, #C47A91 0%, #B0677D 100%);
 }
 
 /* Utility Classes */
@@ -188,13 +266,13 @@ h6 {
 }
 
 .section-spacing {
-  @apply py-12 sm:py-16;
+  @apply py-16 sm:py-20;
 }
 
 /* Loading Spinner */
 .spinner {
   border: 2px solid var(--gray-200);
-  border-top: 2px solid var(--theme-accent);
+  border-top: 2px solid var(--gold);
   border-radius: 50%;
   width: 32px;
   height: 32px;
@@ -212,8 +290,23 @@ h6 {
 }
 
 /* Text Gradients */
+.text-gradient-rose {
+  @apply bg-gradient-to-r from-rose-500 to-rose-400 bg-clip-text text-transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #D4AF37 0%, #E8C97A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-pink {
+  @apply bg-gradient-to-r from-rose-500 to-rose-400 bg-clip-text text-transparent;
+}
+
 .text-gradient-purple {
-  @apply bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-rose-500 to-rose-400 bg-clip-text text-transparent;
 }
 
 .text-gradient-sage {
@@ -221,19 +314,50 @@ h6 {
 }
 
 *:focus-visible {
-  outline: 2px solid var(--theme-accent);
+  outline: 2px solid var(--gold);
   outline-offset: 2px;
 }
 
-/* ChainForm specific styles */
+/* PepQueen Luxury Styles */
+.pepqueen-gradient {
+  background: linear-gradient(135deg, #F6E1E7 0%, #FFF9FB 50%, #F6E1E7 100%);
+}
+
 .chainform-gradient {
-  background: linear-gradient(135deg, var(--primary-purple) 0%, #8580E0 100%);
+  background: linear-gradient(135deg, #F6E1E7 0%, #FFF9FB 50%, #F6E1E7 100%);
+}
+
+.pepqueen-card {
+  @apply bg-white rounded-brand-lg border border-blush-200 shadow-soft transition-all duration-400;
+}
+
+.pepqueen-card:hover {
+  @apply shadow-luxury border-rose-200 -translate-y-0.5;
 }
 
 .chainform-card {
-  @apply bg-white rounded-brand-lg border border-neutral-100 shadow-soft transition-all duration-300;
+  @apply bg-white rounded-brand-lg border border-blush-200 shadow-soft transition-all duration-400;
 }
 
 .chainform-card:hover {
-  @apply shadow-medium border-neutral-200 -translate-y-0.5;
+  @apply shadow-luxury border-rose-200 -translate-y-0.5;
+}
+
+/* Gold Accent Line */
+.gold-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #D4AF37 20%, #E8C97A 50%, #D4AF37 80%, transparent 100%);
+}
+
+.gold-border-top {
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+/* Luxury Section Background */
+.luxury-bg {
+  background: linear-gradient(180deg, #FFF9FB 0%, #F6E1E7 100%);
+}
+
+.luxury-bg-reverse {
+  background: linear-gradient(180deg, #F6E1E7 0%, #FFF9FB 100%);
 }

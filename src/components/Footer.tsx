@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle, Shield, Heart, HelpCircle, Calculator, FileText, Truck, ClipboardCheck } from 'lucide-react';
+import { MessageCircle, Heart, HelpCircle, Calculator, FileText, Truck, ClipboardCheck, Sparkles } from 'lucide-react';
 import { useCOAPageSetting } from '../hooks/useCOAPageSetting';
 
 const Footer: React.FC = () => {
@@ -7,35 +7,35 @@ const Footer: React.FC = () => {
   const { coaPageEnabled } = useCOAPageSetting();
 
   return (
-    <footer className="bg-white border-t border-neutral-200 pt-12 pb-6">
+    <footer className="bg-white pt-12 pb-6" style={{ borderTop: '1px solid rgba(212, 175, 55, 0.2)' }}>
+      {/* Gold accent line */}
+      <div className="w-full h-[1px] mb-12" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.4) 30%, rgba(212, 175, 55, 0.4) 70%, transparent 100%)' }} />
+
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
 
-          {/* Brand Section */}
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-brand overflow-hidden border border-neutral-100">
+          {/* Brand Section - Logo Only */}
+          <div className="flex items-center">
+            <div
+              className="h-14 md:h-16 rounded-lg overflow-hidden"
+              style={{ border: '1px solid rgba(212, 175, 55, 0.3)' }}
+            >
               <img
                 src="/assets/logo.jpg"
-                alt="ChainForm"
-                className="w-full h-full object-cover"
+                alt="PepQueen - Royal Results"
+                className="h-full w-auto object-contain"
               />
-            </div>
-            <div className="text-left">
-              <div className="font-bold text-theme-text text-lg tracking-tight font-space-grotesk">
-                ChainForm
-              </div>
-              <div className="text-xs text-neutral-500">Connected Science. Clean Solutions.</div>
             </div>
           </div>
 
           {/* Contact Emails */}
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-sm text-neutral-500">
-            <span className="text-xs font-medium text-neutral-400 uppercase">Contact Us:</span>
-            <a href="mailto:peptidewhisperer@gmail.com" className="hover:text-purple-500 transition-colors">
+            <span className="text-xs font-medium uppercase" style={{ color: '#D4AF37' }}>Contact Us:</span>
+            <a href="mailto:peptidewhisperer@gmail.com" className="hover:text-rose-400 transition-colors">
               peptidewhisperer@gmail.com
             </a>
-            <span className="hidden sm:inline text-neutral-300">|</span>
-            <a href="mailto:thepeptidepulse@gmail.com" className="hover:text-purple-500 transition-colors">
+            <span className="hidden sm:inline text-blush-300">|</span>
+            <a href="mailto:thepeptidepulse@gmail.com" className="hover:text-rose-400 transition-colors">
               thepeptidepulse@gmail.com
             </a>
           </div>
@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
           <div className="flex flex-wrap items-center gap-4 justify-center md:justify-end">
             <a
               href="/track-order"
-              className="text-neutral-500 hover:text-purple-500 transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-neutral-500 hover:text-rose-400 transition-colors flex items-center gap-2 text-sm font-medium"
             >
               <Truck className="w-4 h-4" />
               Track Order
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
             {coaPageEnabled && (
               <a
                 href="/coa"
-                className="text-neutral-500 hover:text-purple-500 transition-colors flex items-center gap-2 text-sm font-medium"
+                className="text-neutral-500 hover:text-rose-400 transition-colors flex items-center gap-2 text-sm font-medium"
               >
                 <FileText className="w-4 h-4" />
                 Lab Tests
@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
             </a>
             <a
               href="/assessment"
-              className="text-neutral-500 hover:text-purple-500 transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-neutral-500 hover:text-rose-400 transition-colors flex items-center gap-2 text-sm font-medium"
             >
               <ClipboardCheck className="w-4 h-4" />
               Assessment
@@ -109,11 +109,15 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Footer Bottom */}
-        <div className="border-t border-neutral-100 pt-6 text-center">
-          <p className="text-xs text-neutral-400 flex items-center justify-center gap-1">
+        <div className="pt-6 text-center" style={{ borderTop: '1px solid rgba(212, 175, 55, 0.1)' }}>
+          <p className="text-xs text-neutral-400 flex items-center justify-center gap-2">
             Made with
-            <Heart className="w-3 h-3 text-blush-400 fill-blush-400" />
-            © {currentYear} ChainForm.
+            <Heart className="w-3 h-3 text-rose-400 fill-rose-400" />
+            <Sparkles className="w-3 h-3" style={{ color: '#D4AF37' }} />
+            © {currentYear} PepQueen.
+          </p>
+          <p className="text-[10px] mt-2 font-medium tracking-wider" style={{ color: '#D4AF37' }}>
+            Royal Confidence. Refined Power.
           </p>
         </div>
       </div>

@@ -15,6 +15,7 @@ import PeptideCalculator from './components/PeptideCalculator';
 import OrderTracking from './components/OrderTracking';
 import AssessmentWizard from './components/AssessmentWizard';
 import AssessmentResults from './components/AssessmentResults';
+import Testimonials from './components/Testimonials';
 import { useMenu } from './hooks/useMenu';
 // import { useCOAPageSetting } from './hooks/useCOAPageSetting';
 
@@ -109,6 +110,7 @@ function App() {
         <Route path="/track-order" element={<OrderTracking />} />
         <Route path="/assessment" element={<AssessmentWizard />} />
         <Route path="/assessment/results" element={<AssessmentResults />} />
+        <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </Router>

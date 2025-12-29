@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Edit, Trash2, Save, X, ArrowLeft, TrendingUp, Package, Users, FolderOpen, CreditCard, Sparkles, Layers, Shield, RefreshCw, Warehouse, ShoppingCart, HelpCircle, MapPin, Settings, Tag } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, X, ArrowLeft, TrendingUp, Package, Users, FolderOpen, CreditCard, Sparkles, Layers, Shield, RefreshCw, Warehouse, ShoppingCart, HelpCircle, MapPin, Settings, Tag, MessageSquareText } from 'lucide-react';
 import type { Product } from '../types';
 import { useMenu } from '../hooks/useMenu';
 import { useCategories } from '../hooks/useCategories';
@@ -14,6 +14,7 @@ import FAQManager from './FAQManager';
 import ShippingManager from './ShippingManager';
 import SiteSettingsManager from './SiteSettingsManager';
 import PromoCodeManager from './PromoCodeManager';
+import TestimonialsManager from './TestimonialsManager';
 // GuideManager removed (Peptalk functionality disabled)
 
 const AdminDashboard: React.FC = () => {
@@ -24,7 +25,7 @@ const AdminDashboard: React.FC = () => {
   const [loginError, setLoginError] = useState('');
   const { products, loading, addProduct, updateProduct, deleteProduct, refreshProducts } = useMenu();
   const { categories } = useCategories();
-  const [currentView, setCurrentView] = useState<'dashboard' | 'products' | 'add' | 'edit' | 'categories' | 'payments' | 'inventory' | 'orders' | 'shipping' | 'coa' | 'faq' | 'settings' | 'promo-codes'>('dashboard');
+  const [currentView, setCurrentView] = useState<'dashboard' | 'products' | 'add' | 'edit' | 'categories' | 'payments' | 'inventory' | 'orders' | 'shipping' | 'coa' | 'faq' | 'settings' | 'promo-codes' | 'testimonials'>('dashboard');
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [managingVariationsProductId, setManagingVariationsProductId] = useState<string | null>(null);
@@ -371,11 +372,11 @@ const AdminDashboard: React.FC = () => {
       <div className="min-h-screen bg-theme-bg flex items-center justify-center px-4">
         <div className="bg-white rounded-xl shadow-soft p-6 md:p-8 w-full max-w-md border border-navy-900/20">
           <div className="text-center mb-6">
-            <div className="relative mx-auto w-16 h-16 rounded-full overflow-hidden mb-4 border-2 border-theme-accent/30">
+            <div className="relative mx-auto h-20 rounded-lg overflow-hidden mb-4" style={{ border: '2px solid rgba(212, 175, 55, 0.3)' }}>
               <img
                 src="/assets/logo.jpg"
-                alt="ChainForm"
-                className="w-full h-full object-cover"
+                alt="PepQueen - Royal Results"
+                className="h-full w-auto mx-auto object-contain"
               />
             </div>
             <h1 className="text-2xl font-bold text-theme-text mb-1">Admin Access</h1>
@@ -1099,6 +1100,24 @@ const AdminDashboard: React.FC = () => {
     );
   }
 
+  // Testimonials View
+  if (currentView === 'testimonials') {
+    return (
+      <div className="min-h-screen bg-gray-50 p-4">
+        <div className="max-w-4xl mx-auto">
+          <button
+            onClick={() => setCurrentView('dashboard')}
+            className="mb-4 text-gray-600 hover:text-navy-900 flex items-center gap-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Dashboard
+          </button>
+          <TestimonialsManager />
+        </div>
+      </div>
+    );
+  }
+
   // Guides view removed (Peptalk disabled)
 
 
@@ -1149,13 +1168,13 @@ const AdminDashboard: React.FC = () => {
                 <div className="w-9 h-9 rounded-full overflow-hidden border border-navy-900/20">
                   <img
                     src="/assets/logo.jpg"
-                    alt="ChainForm"
+                    alt="PepQueen"
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div>
                   <h1 className="text-base font-bold text-theme-text">
-                    ChainForm
+                    PepQueen
                   </h1>
                   <p className="text-xs text-gray-500">
                     Admin Dashboard
@@ -1342,6 +1361,15 @@ const AdminDashboard: React.FC = () => {
                     <Tag className="h-4 w-4 text-green-700" />
                   </div>
                   <span className="text-sm font-medium text-gray-900">Promo Codes</span>
+                </button>
+                <button
+                  onClick={() => setCurrentView('testimonials')}
+                  className="w-full flex items-center gap-3 p-2 text-left hover:bg-gray-50 rounded-lg transition-all"
+                >
+                  <div className="p-1.5 bg-pink-50 rounded-lg">
+                    <MessageSquareText className="h-4 w-4 text-pink-600" />
+                  </div>
+                  <span className="text-sm font-medium text-gray-900">Customer Testimonials</span>
                 </button>
                 {/* Peptalk button removed */}
                 <button

@@ -97,13 +97,13 @@ const SiteSettingsManager: React.FC = () => {
     if (confirm('Are you sure you want to reset the homepage content to defaults?')) {
       setFormData(prev => ({
         ...prev,
-        hero_badge_text: 'Premium Peptide Solutions',
-        hero_title_prefix: 'Premium',
-        hero_title_highlight: 'Peptides',
-        hero_title_suffix: '& Essentials',
-        hero_subtext: 'From the Lab to You — Simplifying Science, One Dose at a Time.',
-        hero_tagline: 'Quality-tested products. Reliable performance. Trusted by our community.',
-        hero_description: 'ChainForm delivers high-quality peptides and medical supplies through a system built on clarity, consistency, and care.',
+        hero_badge_text: 'Royal Feminine Wellness',
+        hero_title_prefix: 'Own Your',
+        hero_title_highlight: 'Results',
+        hero_title_suffix: '',
+        hero_subtext: 'Elevate Your Body.',
+        hero_tagline: 'Own Your Results. Elevate Your Body.',
+        hero_description: 'Premium peptides designed for real, visible results.',
       }));
     }
   };
