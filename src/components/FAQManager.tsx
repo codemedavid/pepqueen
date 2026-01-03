@@ -107,15 +107,15 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                             <ArrowLeft className="w-6 h-6 text-gray-600" />
                         </button>
                     )}
-                    <HelpCircle className="w-6 h-6 text-navy-900" />
-                    <h2 className="text-xl font-bold text-navy-900">FAQ Management</h2>
+                    <HelpCircle className="w-6 h-6 text-gray-600" />
+                    <h2 className="text-xl font-bold text-gray-900">FAQ Management</h2>
                 </div>
                 <button
                     onClick={() => {
                         resetForm();
                         setIsAdding(true);
                     }}
-                    className="w-full md:w-auto flex items-center justify-center gap-2 bg-navy-900 text-white px-4 py-2 rounded-lg hover:bg-navy-800 transition-colors shadow-sm"
+                    className="w-full md:w-auto flex items-center justify-center gap-2 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
                 >
                     <Plus className="w-4 h-4" />
                     Add FAQ
@@ -143,7 +143,7 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                                 type="text"
                                 value={formData.question}
                                 onChange={(e) => setFormData({ ...formData, question: e.target.value })}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:border-transparent"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                                 placeholder="Enter the question"
                                 required
                             />
@@ -155,7 +155,7 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                             <textarea
                                 value={formData.answer}
                                 onChange={(e) => setFormData({ ...formData, answer: e.target.value })}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:border-transparent"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                                 placeholder="Enter the answer (supports line breaks)"
                                 rows={5}
                                 required
@@ -169,7 +169,7 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                                 <select
                                     value={formData.category}
                                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:border-transparent"
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                                 >
                                     {categories.map((cat) => (
                                         <option key={cat} value={cat}>
@@ -186,7 +186,7 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                                     type="number"
                                     value={formData.order_index}
                                     onChange={(e) => setFormData({ ...formData, order_index: parseInt(e.target.value) })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:border-transparent"
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                                     min={1}
                                 />
                             </div>
@@ -197,7 +197,7 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                                 id="is_active"
                                 checked={formData.is_active}
                                 onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
-                                className="w-4 h-4 rounded border-gray-300 text-navy-900 focus:ring-navy-900"
+                                className="w-4 h-4 rounded border-gray-300 text-red-500 focus:ring-red-500"
                             />
                             <label htmlFor="is_active" className="text-sm text-gray-700">
                                 Active (visible on website)
@@ -206,7 +206,7 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                         <div className="flex gap-3">
                             <button
                                 type="submit"
-                                className="flex items-center gap-2 bg-navy-900 text-white px-4 py-2 rounded-lg hover:bg-navy-800 transition-colors shadow-sm"
+                                className="flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
                             >
                                 <Save className="w-4 h-4" />
                                 {editingId ? 'Update FAQ' : 'Save FAQ'}
@@ -242,9 +242,9 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                         return (
                             <div key={category}>
                                 {/* Section Header */}
-                                <div className="flex items-center gap-3 mb-8 px-5 py-4 rounded-lg border border-navy-900 bg-white shadow-sm w-full">
-                                    <HelpCircle className="w-6 h-6 text-gold-500" />
-                                    <h2 className="font-bold text-base md:text-lg uppercase tracking-wide text-navy-900">{category}</h2>
+                                <div className="flex items-center gap-3 mb-8 px-5 py-4 rounded-lg border border-gray-200 bg-white shadow-sm w-full">
+                                    <HelpCircle className="w-6 h-6 text-gray-600" />
+                                    <h2 className="font-bold text-base md:text-lg uppercase tracking-wide text-gray-900">{category}</h2>
                                 </div>
 
                                 <div className="space-y-6">
@@ -263,7 +263,7 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <h3 className="font-bold text-navy-900 text-lg md:text-xl leading-snug mb-3">
+                                                    <h3 className="font-bold text-gray-900 text-lg md:text-xl leading-snug mb-3">
                                                         {faq.question}
                                                     </h3>
                                                     <p className="text-gray-600 whitespace-pre-line leading-relaxed text-base md:text-lg">
@@ -288,7 +288,7 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                                                     </button>
                                                     <button
                                                         onClick={() => handleEdit(faq)}
-                                                        className="p-2.5 text-navy-900 hover:bg-navy-50 rounded-lg transition-colors"
+                                                        className="p-2.5 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
                                                         title="Edit FAQ"
                                                     >
                                                         <Edit2 className="w-5 h-5" />

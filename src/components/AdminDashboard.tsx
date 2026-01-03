@@ -344,7 +344,7 @@ const AdminDashboard: React.FC = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === 'Peptidepulse@Admin123') {
+    if (password === 'Pepqueen@Admin!123') {
       setIsAuthenticated(true);
       localStorage.setItem('peptide_admin_auth', 'true');
       setLoginError('');
@@ -369,17 +369,17 @@ const AdminDashboard: React.FC = () => {
   // Login Screen
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-theme-bg flex items-center justify-center px-4">
-        <div className="bg-white rounded-xl shadow-soft p-6 md:p-8 w-full max-w-md border border-navy-900/20">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+        <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 w-full max-w-md border border-gray-200">
           <div className="text-center mb-6">
-            <div className="relative mx-auto h-20 rounded-lg overflow-hidden mb-4" style={{ border: '2px solid rgba(212, 175, 55, 0.3)' }}>
+            <div className="mx-auto w-16 h-16 rounded-full overflow-hidden mb-4 border border-gray-200">
               <img
                 src="/assets/logo.jpg"
-                alt="PepQueen - Royal Results"
-                className="h-full w-auto mx-auto object-contain"
+                alt="PepQueen"
+                className="w-full h-full object-cover"
               />
             </div>
-            <h1 className="text-2xl font-bold text-theme-text mb-1">Admin Access</h1>
+            <h1 className="text-xl font-bold text-gray-900 mb-1">Admin Access</h1>
             <p className="text-sm text-gray-500">
               Enter password to continue
             </p>
@@ -392,18 +392,18 @@ const AdminDashboard: React.FC = () => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-navy-900/20 rounded-lg focus:ring-2 focus:ring-theme-accent focus:border-theme-accent transition-colors"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
                 placeholder="Enter admin password"
                 required
               />
               {loginError && (
-                <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
-                  ❌ {loginError}
+                <p className="text-red-500 text-sm mt-2">
+                  {loginError}
                 </p>
               )}
             </div>
 
-            <button type="submit" className="w-full bg-navy-900 hover:bg-navy-800 text-white py-3 rounded-lg font-semibold transition-all shadow-md hover:shadow-lg">
+            <button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg font-semibold transition-all">
               Access Dashboard
             </button>
           </form>
@@ -1161,11 +1161,11 @@ const AdminDashboard: React.FC = () => {
     <>
       {variationManagerModal}
       <div className="min-h-screen bg-gray-50">
-        <div className="bg-white shadow-md border-b-4 border-navy-900">
+        <div className="bg-white shadow-sm border-b border-gray-200">
           <div className="max-w-6xl mx-auto px-4">
-            <div className="flex items-center justify-between h-14">
+            <div className="flex items-center justify-between h-16">
               <div className="flex items-center space-x-3">
-                <div className="w-9 h-9 rounded-full overflow-hidden border border-navy-900/20">
+                <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200">
                   <img
                     src="/assets/logo.jpg"
                     alt="PepQueen"
@@ -1173,7 +1173,7 @@ const AdminDashboard: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <h1 className="text-base font-bold text-theme-text">
+                  <h1 className="text-lg font-bold text-gray-900">
                     PepQueen
                   </h1>
                   <p className="text-xs text-gray-500">
@@ -1181,18 +1181,18 @@ const AdminDashboard: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-4">
                 <a
                   href="/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-theme-accent transition-colors font-medium text-sm hidden sm:block"
+                  className="text-gray-600 hover:text-gray-900 transition-colors font-medium text-sm"
                 >
                   View Website
                 </a>
                 <button
                   onClick={handleLogout}
-                  className="bg-navy-900 hover:bg-navy-800 text-white px-4 py-2 rounded-lg transition-colors font-medium text-sm shadow-sm"
+                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors font-medium text-sm"
                 >
                   Logout
                 </button>
@@ -1206,27 +1206,23 @@ const AdminDashboard: React.FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
             <button
               onClick={() => setCurrentView('products')}
-              className="bg-white rounded-xl shadow-soft hover:shadow-md transition-all p-4 border border-gray-100 text-left cursor-pointer"
+              className="bg-white rounded-lg shadow-sm hover:shadow transition-all p-4 border border-gray-200 text-left cursor-pointer"
             >
               <div className="flex items-center">
-                <div className="p-2 bg-theme-accent/10 rounded-lg">
-                  <Package className="h-4 w-4 text-theme-accent" />
-                </div>
+                <Package className="h-5 w-5 text-red-500" />
                 <div className="ml-3">
                   <p className="text-xs font-medium text-gray-500">Total Products</p>
-                  <p className="text-xl font-bold text-theme-text">{totalProducts}</p>
+                  <p className="text-xl font-bold text-gray-900">{totalProducts}</p>
                 </div>
               </div>
             </button>
 
             <button
               onClick={() => setCurrentView('products')}
-              className="bg-white rounded-xl shadow-soft hover:shadow-md transition-all p-4 border border-gray-100 text-left cursor-pointer"
+              className="bg-white rounded-lg shadow-sm hover:shadow transition-all p-4 border border-gray-200 text-left cursor-pointer"
             >
               <div className="flex items-center">
-                <div className="p-2 bg-green-50 rounded-lg">
-                  <TrendingUp className="h-4 w-4 text-green-600" />
-                </div>
+                <TrendingUp className="h-5 w-5 text-green-500" />
                 <div className="ml-3">
                   <p className="text-xs font-medium text-gray-500">Available</p>
                   <p className="text-xl font-bold text-green-600">{availableProducts}</p>
@@ -1236,27 +1232,23 @@ const AdminDashboard: React.FC = () => {
 
             <button
               onClick={() => setCurrentView('products')}
-              className="bg-white rounded-xl shadow-soft hover:shadow-md transition-all p-4 border border-gray-100 text-left cursor-pointer"
+              className="bg-white rounded-lg shadow-sm hover:shadow transition-all p-4 border border-gray-200 text-left cursor-pointer"
             >
               <div className="flex items-center">
-                <div className="p-2 bg-theme-secondary/10 rounded-lg">
-                  <Sparkles className="h-4 w-4 text-theme-secondary" />
-                </div>
+                <Sparkles className="h-5 w-5 text-orange-500" />
                 <div className="ml-3">
                   <p className="text-xs font-medium text-gray-500">Featured</p>
-                  <p className="text-xl font-bold text-theme-secondary">{featuredProducts}</p>
+                  <p className="text-xl font-bold text-gray-900">{featuredProducts}</p>
                 </div>
               </div>
             </button>
 
             <button
               onClick={() => setCurrentView('categories')}
-              className="bg-white rounded-xl shadow-soft hover:shadow-md transition-all p-4 border border-gray-100 text-left cursor-pointer"
+              className="bg-white rounded-lg shadow-sm hover:shadow transition-all p-4 border border-gray-200 text-left cursor-pointer"
             >
               <div className="flex items-center">
-                <div className="p-2 bg-blue-50 rounded-lg">
-                  <Users className="h-4 w-4 text-blue-600" />
-                </div>
+                <Users className="h-5 w-5 text-blue-500" />
                 <div className="ml-3">
                   <p className="text-xs font-medium text-gray-500">Categories</p>
                   <p className="text-xl font-bold text-blue-600">{categories.length}</p>
@@ -1267,8 +1259,8 @@ const AdminDashboard: React.FC = () => {
 
           {/* Quick Actions */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-white rounded-xl shadow-soft p-4 border border-gray-100">
-              <h3 className="text-base font-bold text-theme-text mb-3">
+            <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">
+              <h3 className="text-base font-semibold text-gray-900 mb-3">
                 Quick Actions
               </h3>
               <div className="space-y-1">
@@ -1276,116 +1268,91 @@ const AdminDashboard: React.FC = () => {
                   onClick={handleAddProduct}
                   className="w-full flex items-center gap-3 p-2 text-left hover:bg-gray-50 rounded-lg transition-all"
                 >
-                  <div className="p-1.5 bg-navy-50 rounded-lg">
-                    <Plus className="h-4 w-4 text-navy-900" />
-                  </div>
-                  <span className="text-sm font-medium text-navy-900">Add New Product</span>
+                  <Plus className="h-4 w-4 text-gray-600" />
+                  <span className="text-sm font-medium text-gray-700">Add New Product</span>
                 </button>
                 <button
                   onClick={() => setCurrentView('products')}
                   className="w-full flex items-center gap-3 p-2 text-left hover:bg-gray-50 rounded-lg transition-all"
                 >
-                  <div className="p-1.5 bg-navy-50 rounded-lg">
-                    <Package className="h-4 w-4 text-navy-900" />
-                  </div>
-                  <span className="text-sm font-medium text-navy-900">Manage Products</span>
+                  <Package className="h-4 w-4 text-gray-600" />
+                  <span className="text-sm font-medium text-gray-700">Manage Products</span>
                 </button>
                 <button
                   onClick={() => setCurrentView('categories')}
                   className="w-full flex items-center gap-3 p-2 text-left hover:bg-gray-50 rounded-lg transition-all"
                 >
-                  <div className="p-1.5 bg-blue-50 rounded-lg">
-                    <FolderOpen className="h-4 w-4 text-blue-600" />
-                  </div>
+                  <FolderOpen className="h-4 w-4 text-gray-600" />
                   <span className="text-sm font-medium text-gray-700">Manage Categories</span>
                 </button>
                 <button
                   onClick={() => setCurrentView('payments')}
                   className="w-full flex items-center gap-3 p-2 text-left hover:bg-gray-50 rounded-lg transition-all"
                 >
-                  <div className="p-1.5 bg-purple-50 rounded-lg">
-                    <CreditCard className="h-4 w-4 text-purple-600" />
-                  </div>
+                  <CreditCard className="h-4 w-4 text-gray-600" />
                   <span className="text-sm font-medium text-gray-700">Payment Methods</span>
                 </button>
                 <button
                   onClick={() => setCurrentView('inventory')}
                   className="w-full flex items-center gap-3 p-2 text-left hover:bg-gray-50 rounded-lg transition-all"
                 >
-                  <div className="p-1.5 bg-orange-50 rounded-lg">
-                    <Warehouse className="h-4 w-4 text-orange-600" />
-                  </div>
+                  <Warehouse className="h-4 w-4 text-gray-600" />
                   <span className="text-sm font-medium text-gray-700">Peptide Inventory</span>
                 </button>
                 <button
                   onClick={() => setCurrentView('orders')}
                   className="w-full flex items-center gap-3 p-2 text-left hover:bg-gray-50 rounded-lg transition-all"
                 >
-                  <div className="p-1.5 bg-navy-50 rounded-lg">
-                    <ShoppingCart className="h-4 w-4 text-navy-900" />
-                  </div>
-                  <span className="text-sm font-medium text-navy-900">Orders Management</span>
+                  <ShoppingCart className="h-4 w-4 text-gray-600" />
+                  <span className="text-sm font-medium text-gray-700">Orders Management</span>
                 </button>
                 <button
                   onClick={() => setCurrentView('shipping')}
                   className="w-full flex items-center gap-3 p-2 text-left hover:bg-gray-50 rounded-lg transition-all"
                 >
-                  <div className="p-1.5 bg-green-50 rounded-lg">
-                    <MapPin className="h-4 w-4 text-green-600" />
-                  </div>
+                  <MapPin className="h-4 w-4 text-gray-600" />
                   <span className="text-sm font-medium text-gray-700">Shipping Locations</span>
                 </button>
                 <button
                   onClick={() => setCurrentView('coa')}
                   className="w-full flex items-center gap-3 p-2 text-left hover:bg-gray-50 rounded-lg transition-all"
                 >
-                  <div className="p-1.5 bg-navy-50 rounded-lg">
-                    <Shield className="h-4 w-4 text-navy-900" />
-                  </div>
-                  <span className="text-sm font-medium text-navy-900">Lab Results (COA)</span>
+                  <Shield className="h-4 w-4 text-gray-600" />
+                  <span className="text-sm font-medium text-gray-700">Lab Results (COA)</span>
                 </button>
                 <button
                   onClick={() => setCurrentView('faq')}
                   className="w-full flex items-center gap-3 p-2 text-left hover:bg-gray-50 rounded-lg transition-all"
                 >
-                  <div className="p-1.5 bg-navy-50 rounded-lg">
-                    <HelpCircle className="h-4 w-4 text-navy-900" />
-                  </div>
-                  <span className="text-sm font-medium text-navy-900">Manage FAQ</span>
+                  <HelpCircle className="h-4 w-4 text-gray-600" />
+                  <span className="text-sm font-medium text-gray-700">Manage FAQ</span>
                 </button>
                 <button
                   onClick={() => setCurrentView('promo-codes')}
                   className="w-full flex items-center gap-3 p-2 text-left hover:bg-gray-50 rounded-lg transition-all"
                 >
-                  <div className="p-1.5 bg-green-50 rounded-lg">
-                    <Tag className="h-4 w-4 text-green-700" />
-                  </div>
-                  <span className="text-sm font-medium text-gray-900">Promo Codes</span>
+                  <Tag className="h-4 w-4 text-gray-600" />
+                  <span className="text-sm font-medium text-gray-700">Promo Codes</span>
                 </button>
                 <button
                   onClick={() => setCurrentView('testimonials')}
                   className="w-full flex items-center gap-3 p-2 text-left hover:bg-gray-50 rounded-lg transition-all"
                 >
-                  <div className="p-1.5 bg-pink-50 rounded-lg">
-                    <MessageSquareText className="h-4 w-4 text-pink-600" />
-                  </div>
-                  <span className="text-sm font-medium text-gray-900">Customer Testimonials</span>
+                  <MessageSquareText className="h-4 w-4 text-gray-600" />
+                  <span className="text-sm font-medium text-gray-700">Customer Testimonials</span>
                 </button>
-                {/* Peptalk button removed */}
                 <button
                   onClick={() => setCurrentView('settings')}
                   className="w-full flex items-center gap-3 p-2 text-left hover:bg-gray-50 rounded-lg transition-all"
                 >
-                  <div className="p-1.5 bg-gray-100 rounded-lg">
-                    <Settings className="h-4 w-4 text-gray-700" />
-                  </div>
-                  <span className="text-sm font-medium text-gray-900">Site Settings</span>
+                  <Settings className="h-4 w-4 text-gray-600" />
+                  <span className="text-sm font-medium text-gray-700">Site Settings</span>
                 </button>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-soft p-4 border border-gray-100">
-              <h3 className="text-base font-bold text-theme-text mb-3">
+            <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">
+              <h3 className="text-base font-semibold text-gray-900 mb-3">
                 Categories Overview
               </h3>
               <div className="space-y-2">
