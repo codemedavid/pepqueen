@@ -9,6 +9,7 @@ interface Testimonial {
     image_url: string;
     display_order: number;
     is_active: boolean;
+    category: 'proof_of_transactions' | 'proof_of_delivered' | 'customer_reviews';
     created_at: string;
 }
 
@@ -16,6 +17,14 @@ const Testimonials: React.FC = () => {
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
     const [loading, setLoading] = useState(true);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [selectedCategory, setSelectedCategory] = useState<Testimonial['category'] | 'all'>('all');
+
+    const categories: { id: Testimonial['category'] | 'all'; label: string }[] = [
+        { id: 'all', label: 'All Results' },
+        { id: 'proof_of_transactions', label: 'Proof of Payment' },
+        { id: 'proof_of_delivered', label: 'Proof of Delivery' },
+        { id: 'customer_reviews', label: 'Customer Reviews' }
+    ];
 
     useEffect(() => {
         fetchTestimonials();
@@ -49,6 +58,10 @@ const Testimonials: React.FC = () => {
             setSelectedImage(testimonials[newIndex].image_url);
         }
     };
+
+    const filteredTestimonials = selectedCategory === 'all'
+        ? testimonials
+        : testimonials.filter(t => t.category === selectedCategory);
 
     return (
         <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: '#0a0a0a' }}>
@@ -120,6 +133,24 @@ const Testimonials: React.FC = () => {
                 </div>
             </section>
 
+            {/* Category Filter */}
+            <div className="container mx-auto px-4 mb-8 -mt-8 relative z-20">
+                <div className="flex flex-wrap justify-center gap-3">
+                    {categories.map((category) => (
+                        <button
+                            key={category.id}
+                            onClick={() => setSelectedCategory(category.id)}
+                            className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 border ${selectedCategory === category.id
+                                ? 'bg-amber-500 text-black border-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.4)]'
+                                : 'bg-black/40 text-neutral-400 border-white/10 hover:border-amber-500/50 hover:text-amber-400 backdrop-blur-sm'
+                                }`}
+                        >
+                            {category.label}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
             {/* Testimonials Grid */}
             <section className="pb-16 md:pb-24 relative z-10">
                 <div className="container mx-auto px-4">
@@ -132,12 +163,12 @@ const Testimonials: React.FC = () => {
                             <div className="text-neutral-600 mb-4">
                                 <Star className="w-16 h-16 mx-auto opacity-30" />
                             </div>
-                            <h3 className="text-xl font-semibold text-neutral-400 mb-2">No testimonials yet</h3>
-                            <p className="text-neutral-500">Check back soon for customer reviews!</p>
+                            <h3 className="text-xl font-semibold text-neutral-400 mb-2">No testimonials found</h3>
+                            <p className="text-neutral-500">Try selecting a different category.</p>
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                            {testimonials.map((testimonial) => (
+                            {filteredTestimonials.map((testimonial) => (
                                 <div
                                     key={testimonial.id}
                                     className="rounded-2xl overflow-hidden shadow-2xl hover:shadow-amber-900/20 transition-all duration-300 group"
@@ -152,11 +183,32 @@ const Testimonials: React.FC = () => {
                                         className="relative aspect-[3/4] overflow-hidden cursor-pointer"
                                         onClick={() => setSelectedImage(testimonial.image_url)}
                                     >
-                                        <img
-                                            src={testimonial.image_url}
-                                            alt={testimonial.title}
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                        />
+                                        {testimonial.image_url ? (
+                                            <img
+                                                src={testimonial.image_url}
+                                                alt={testimonial.title}
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full bg-gradient-to-br from-neutral-800 to-neutral-900 flex items-center justify-center p-6 text-center">
+                                                <div className="text-neutral-500">
+                                                    <span className="block text-4xl mb-2">💬</span>
+                                                    <span className="text-sm font-medium opacity-50">Verified Feedback</span>
+                                                </div>
+                                            </div>
+                                        )}
+                                        <div className="absolute top-3 left-3 z-10">
+                                            <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold border backdrop-blur-md shadow-lg ${testimonial.category === 'proof_of_transactions'
+                                                ? 'bg-blue-500/90 text-white border-blue-400/50'
+                                                : testimonial.category === 'proof_of_delivered'
+                                                    ? 'bg-green-500/90 text-white border-green-400/50'
+                                                    : 'bg-amber-500/90 text-white border-amber-400/50'
+                                                }`}>
+                                                {testimonial.category === 'proof_of_transactions' ? 'Proof of Payment' :
+                                                    testimonial.category === 'proof_of_delivered' ? 'Proof of Delivery' :
+                                                        'Customer Review'}
+                                            </span>
+                                        </div>
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                         <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm rounded-full px-3 py-1.5 text-xs font-medium text-amber-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-amber-500/30">
                                             Click to expand
@@ -172,6 +224,8 @@ const Testimonials: React.FC = () => {
                                             {testimonial.description}
                                         </p>
                                     </div>
+
+
                                 </div>
                             ))}
                         </div>

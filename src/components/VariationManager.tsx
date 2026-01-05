@@ -6,28 +6,43 @@ import { useMenu } from '../hooks/useMenu';
 interface VariationManagerProps {
   product: Product;
   onClose: () => void;
+  onUpdate?: () => void;
 }
 
-const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose }) => {
+const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, onUpdate }) => {
   const { addVariation, updateVariation, deleteVariation } = useMenu();
   const [isAdding, setIsAdding] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const [newVariation, setNewVariation] = useState({
+  const [newVariation, setNewVariation] = useState<{
+    name: string;
+    quantity_mg: number | '';
+    price: number | '';
+    discount_price: number | '' | null;
+    discount_active: boolean;
+    stock_quantity: number | '';
+  }>({
     name: '',
     quantity_mg: 5.0,
     price: product.base_price,
-    discount_price: null as number | null,
+    discount_price: null,
     discount_active: false,
     stock_quantity: 0
   });
 
-  const [editingVariation, setEditingVariation] = useState({
+  const [editingVariation, setEditingVariation] = useState<{
+    name: string;
+    quantity_mg: number | '';
+    price: number | '';
+    discount_price: number | '' | null;
+    discount_active: boolean;
+    stock_quantity: number | '';
+  }>({
     name: '',
     quantity_mg: 5.0,
     price: product.base_price,
-    discount_price: null as number | null,
+    discount_price: null,
     discount_active: false,
     stock_quantity: 0
   });
@@ -43,11 +58,11 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
       const variationData = {
         product_id: product.id,
         name: newVariation.name,
-        quantity_mg: newVariation.quantity_mg,
-        price: newVariation.price,
-        discount_price: newVariation.discount_price,
+        quantity_mg: Number(newVariation.quantity_mg),
+        price: Number(newVariation.price),
+        discount_price: newVariation.discount_price === '' ? null : newVariation.discount_price,
         discount_active: newVariation.discount_active,
-        stock_quantity: newVariation.stock_quantity
+        stock_quantity: Number(newVariation.stock_quantity)
       };
 
       console.log('📤 Submitting variation:', variationData);
@@ -63,6 +78,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
           stock_quantity: 0
         });
         setIsAdding(false);
+        if (onUpdate) onUpdate();
         alert('Variation added successfully!');
       } else {
         console.error('Failed to add variation:', result.error);
@@ -100,6 +116,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
       const result = await updateVariation(editingId, editingVariation);
       if (result.success) {
         setEditingId(null);
+        if (onUpdate) onUpdate();
         alert('Variation updated successfully!');
       } else {
         alert(result.error || 'Failed to update variation');
@@ -118,6 +135,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
       setIsProcessing(true);
       const result = await deleteVariation(id);
       if (result.success) {
+        if (onUpdate) onUpdate();
         alert('Variation deleted successfully!');
       } else {
         alert(result.error || 'Failed to delete variation');
@@ -133,15 +151,15 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-teal-500 to-emerald-600 text-white p-6">
+        <div className="bg-gradient-to-r from-navy-900 to-navy-800 text-white p-6">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-2xl font-bold flex items-center gap-2">
-                <Package className="w-6 h-6" />
-                Manage Size Variations
+                <Package className="w-6 h-6 text-gold-400" />
+                Manage Variations
               </h2>
-              <p className="text-teal-100 mt-1">Product: {product.name}</p>
-              <p className="text-teal-50 text-sm mt-2 bg-teal-700/30 px-3 py-1.5 rounded-lg inline-block">
+              <p className="text-gray-300 mt-1">Product: {product.name}</p>
+              <p className="text-white/90 text-sm mt-2 bg-white/10 px-3 py-1.5 rounded-lg inline-block border border-white/20">
                 💡 <strong>These prices</strong> are what customers see on the website!
               </p>
             </div>
@@ -158,8 +176,8 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-180px)]">
           {/* Current Variations */}
           <div className="mb-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-              Current Sizes
+            <h3 className="text-lg font-bold text-navy-900 mb-4 flex items-center gap-2">
+              Current Variations
               <span className="text-sm font-normal text-gray-500">
                 ({product.variations?.length || 0} variations)
               </span>
@@ -168,8 +186,8 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
             {!product.variations || product.variations.length === 0 ? (
               <div className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-8 text-center">
                 <Package className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                <p className="text-gray-600 font-medium">No size variations yet</p>
-                <p className="text-sm text-gray-500 mt-1">Add your first size option below</p>
+                <p className="text-gray-600 font-medium">No variations yet</p>
+                <p className="text-sm text-gray-500 mt-1">Add your first variation below</p>
               </div>
             ) : (
               <div className="space-y-3">
@@ -177,13 +195,13 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                   <div key={variation.id}>
                     {editingId === variation.id ? (
                       // Edit Mode
-                      <div className="bg-white border-2 border-blue-300 rounded-xl p-4 space-y-4">
+                      <div className="bg-white border-2 border-navy-100 rounded-xl p-4 space-y-4 shadow-sm">
                         <h4 className="font-bold text-gray-900 mb-4">Edit Variation</h4>
 
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">
-                              Size Name *
+                            <label className="block text-sm font-semibold text-navy-900 mb-2">
+                              Variation Name *
                             </label>
                             <input
                               type="text"
@@ -201,7 +219,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                               type="number"
                               step="0.1"
                               value={editingVariation.quantity_mg}
-                              onChange={(e) => setEditingVariation({ ...editingVariation, quantity_mg: parseFloat(e.target.value) || 0 })}
+                              onChange={(e) => setEditingVariation({ ...editingVariation, quantity_mg: e.target.value === '' ? '' : parseFloat(e.target.value) })}
                               className="input-field"
                             />
                           </div>
@@ -214,7 +232,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                               type="number"
                               step="0.01"
                               value={editingVariation.price}
-                              onChange={(e) => setEditingVariation({ ...editingVariation, price: parseFloat(e.target.value) || 0 })}
+                              onChange={(e) => setEditingVariation({ ...editingVariation, price: e.target.value === '' ? '' : parseFloat(e.target.value) })}
                               className="input-field"
                             />
                           </div>
@@ -226,7 +244,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                             <input
                               type="number"
                               value={editingVariation.stock_quantity}
-                              onChange={(e) => setEditingVariation({ ...editingVariation, stock_quantity: parseInt(e.target.value) || 0 })}
+                              onChange={(e) => setEditingVariation({ ...editingVariation, stock_quantity: e.target.value === '' ? '' : parseInt(e.target.value) })}
                               className="input-field"
                             />
                           </div>
@@ -238,8 +256,8 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                             <input
                               type="number"
                               step="0.01"
-                              value={editingVariation.discount_price || ''}
-                              onChange={(e) => setEditingVariation({ ...editingVariation, discount_price: parseFloat(e.target.value) || null })}
+                              value={editingVariation.discount_price === null ? '' : editingVariation.discount_price}
+                              onChange={(e) => setEditingVariation({ ...editingVariation, discount_price: e.target.value === '' ? '' : parseFloat(e.target.value) })}
                               className="input-field"
                               placeholder="Leave empty for no discount"
                             />
@@ -255,9 +273,9 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                                   discount_active: e.target.checked,
                                   discount_price: e.target.checked ? editingVariation.discount_price : null
                                 })}
-                                className="w-4 h-4 text-teal-600 rounded focus:ring-teal-500"
+                                className="w-4 h-4 text-navy-900 rounded focus:ring-navy-900"
                               />
-                              <span className="text-sm font-semibold text-gray-700">🏷️ Enable Discount</span>
+                              <span className="text-sm font-semibold text-navy-900">🏷️ Enable Discount</span>
                             </label>
                           </div>
                         </div>
@@ -266,7 +284,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                           <button
                             onClick={handleUpdateVariation}
                             disabled={isProcessing}
-                            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-xl font-bold transition-all shadow-md hover:shadow-lg disabled:opacity-50"
+                            className="flex items-center gap-2 px-6 py-3 bg-navy-900 hover:bg-navy-800 text-white rounded-xl font-bold transition-all shadow-md hover:shadow-lg disabled:opacity-50"
                           >
                             <Save className="w-5 h-5" />
                             Save Changes
@@ -282,11 +300,11 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                       </div>
                     ) : (
                       // View Mode
-                      <div className="bg-gradient-to-r from-teal-50 to-emerald-50 border-2 border-teal-200 rounded-xl p-4 flex items-center justify-between">
-                        <div className="flex-1 grid grid-cols-4 gap-4">
+                      <div className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between hover:border-navy-200 transition-colors shadow-sm gap-4">
+                        <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-4 w-full">
                           <div>
-                            <div className="text-xs text-gray-500 mb-1">Size Name</div>
-                            <div className="font-bold text-gray-900">{variation.name}</div>
+                            <div className="text-xs text-gray-500 mb-1">Variation Name</div>
+                            <div className="font-bold text-navy-900">{variation.name}</div>
                           </div>
                           <div>
                             <div className="text-xs text-gray-500 mb-1">Quantity</div>
@@ -294,14 +312,14 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                           </div>
                           <div>
                             <div className="text-xs text-gray-500 mb-1">Price</div>
-                            <div className="font-semibold text-teal-600">₱{variation.price.toLocaleString()}</div>
+                            <div className="font-semibold text-navy-900">₱{variation.price.toLocaleString()}</div>
                           </div>
                           <div>
                             <div className="text-xs text-gray-500 mb-1">Stock</div>
                             <div className="font-semibold text-gray-700">{variation.stock_quantity} units</div>
                           </div>
                         </div>
-                        <div className="flex gap-2 ml-4">
+                        <div className="flex gap-2 w-full sm:w-auto justify-end border-t sm:border-t-0 pt-3 sm:pt-0 border-gray-100">
                           <button
                             onClick={() => handleEditVariation(variation)}
                             disabled={isProcessing}
@@ -328,32 +346,32 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
           </div>
 
           {/* Add New Variation */}
-          <div className="border-t-2 border-gray-200 pt-6">
+          <div className="border-t border-gray-200 pt-6">
             <button
               onClick={() => {
                 setIsAdding(!isAdding);
                 setEditingId(null); // Close edit mode when adding new
               }}
-              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white rounded-lg font-medium transition-all shadow-md hover:shadow-lg mb-4"
+              className="flex items-center gap-2 px-4 py-2 bg-navy-900 hover:bg-navy-800 text-white rounded-lg font-medium transition-all shadow-md hover:shadow-lg mb-4"
             >
-              <Plus className="w-5 h-5" />
-              {isAdding ? 'Cancel' : 'Add New Size'}
+              <Plus className="w-5 h-5 text-gold-400" />
+              {isAdding ? 'Cancel' : 'Add New Variation'}
             </button>
 
             {isAdding && (
-              <div className="bg-white border-2 border-teal-300 rounded-xl p-6 space-y-4">
-                <h4 className="font-bold text-gray-900 mb-4">New Size Variation</h4>
+              <div className="bg-white border-2 border-navy-100 rounded-xl p-6 space-y-4 shadow-sm">
+                <h4 className="font-bold text-navy-900 mb-4">New Variation</h4>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Size Name *
+                    <label className="block text-sm font-semibold text-navy-900 mb-2">
+                      Variation Name *
                     </label>
                     <input
                       type="text"
                       value={newVariation.name}
                       onChange={(e) => setNewVariation({ ...newVariation, name: e.target.value })}
-                      placeholder="e.g., 5mg, 10mg, 20mg"
+                      placeholder="e.g., 5mg, 10mg, Kit"
                       className="input-field"
                     />
                   </div>
@@ -366,7 +384,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                       type="number"
                       step="0.1"
                       value={newVariation.quantity_mg}
-                      onChange={(e) => setNewVariation({ ...newVariation, quantity_mg: parseFloat(e.target.value) || 0 })}
+                      onChange={(e) => setNewVariation({ ...newVariation, quantity_mg: e.target.value === '' ? '' : parseFloat(e.target.value) })}
                       className="input-field"
                     />
                   </div>
@@ -379,7 +397,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                       type="number"
                       step="0.01"
                       value={newVariation.price}
-                      onChange={(e) => setNewVariation({ ...newVariation, price: parseFloat(e.target.value) || 0 })}
+                      onChange={(e) => setNewVariation({ ...newVariation, price: e.target.value === '' ? '' : parseFloat(e.target.value) })}
                       className="input-field"
                     />
                   </div>
@@ -391,7 +409,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                     <input
                       type="number"
                       value={newVariation.stock_quantity}
-                      onChange={(e) => setNewVariation({ ...newVariation, stock_quantity: parseInt(e.target.value) || 0 })}
+                      onChange={(e) => setNewVariation({ ...newVariation, stock_quantity: e.target.value === '' ? '' : parseInt(e.target.value) })}
                       className="input-field"
                     />
                   </div>
@@ -403,8 +421,8 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                     <input
                       type="number"
                       step="0.01"
-                      value={newVariation.discount_price || ''}
-                      onChange={(e) => setNewVariation({ ...newVariation, discount_price: parseFloat(e.target.value) || null })}
+                      value={newVariation.discount_price === null ? '' : newVariation.discount_price}
+                      onChange={(e) => setNewVariation({ ...newVariation, discount_price: e.target.value === '' ? '' : parseFloat(e.target.value) })}
                       className="input-field"
                       placeholder="Leave empty for no discount"
                     />
@@ -420,9 +438,9 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                           discount_active: e.target.checked,
                           discount_price: e.target.checked ? newVariation.discount_price : null
                         })}
-                        className="w-4 h-4 text-teal-600 rounded focus:ring-teal-500"
+                        className="w-4 h-4 text-navy-900 rounded focus:ring-navy-900"
                       />
-                      <span className="text-sm font-semibold text-gray-700">🏷️ Enable Discount</span>
+                      <span className="text-sm font-semibold text-navy-900">🏷️ Enable Discount</span>
                     </label>
                   </div>
                 </div>
@@ -431,7 +449,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                   <button
                     onClick={handleAddVariation}
                     disabled={isProcessing}
-                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white rounded-xl font-bold transition-all shadow-md hover:shadow-lg disabled:opacity-50"
+                    className="flex items-center gap-2 px-6 py-3 bg-navy-900 hover:bg-navy-800 text-white rounded-xl font-bold transition-all shadow-md hover:shadow-lg disabled:opacity-50"
                   >
                     <Save className="w-5 h-5" />
                     Save Variation

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Edit, Trash2, Save, X, ArrowLeft, TrendingUp, Package, Users, FolderOpen, CreditCard, Sparkles, Layers, Shield, RefreshCw, Warehouse, ShoppingCart, HelpCircle, MapPin, Settings, Tag, MessageSquareText } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, X, ArrowLeft, TrendingUp, Package, Users, FolderOpen, CreditCard, Sparkles, Layers, Shield, RefreshCw, Warehouse, ShoppingCart, HelpCircle, MapPin, Tag, MessageSquareText } from 'lucide-react';
 import type { Product } from '../types';
 import { useMenu } from '../hooks/useMenu';
 import { useCategories } from '../hooks/useCategories';
@@ -12,7 +12,7 @@ import PeptideInventoryManager from './PeptideInventoryManager';
 import OrdersManager from './OrdersManager';
 import FAQManager from './FAQManager';
 import ShippingManager from './ShippingManager';
-import SiteSettingsManager from './SiteSettingsManager';
+
 import PromoCodeManager from './PromoCodeManager';
 import TestimonialsManager from './TestimonialsManager';
 // GuideManager removed (Peptalk functionality disabled)
@@ -25,7 +25,7 @@ const AdminDashboard: React.FC = () => {
   const [loginError, setLoginError] = useState('');
   const { products, loading, addProduct, updateProduct, deleteProduct, refreshProducts } = useMenu();
   const { categories } = useCategories();
-  const [currentView, setCurrentView] = useState<'dashboard' | 'products' | 'add' | 'edit' | 'categories' | 'payments' | 'inventory' | 'orders' | 'shipping' | 'coa' | 'faq' | 'settings' | 'promo-codes' | 'testimonials'>('dashboard');
+  const [currentView, setCurrentView] = useState<'dashboard' | 'products' | 'add' | 'edit' | 'categories' | 'payments' | 'inventory' | 'orders' | 'shipping' | 'coa' | 'faq' | 'promo-codes' | 'testimonials'>('dashboard');
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [managingVariationsProductId, setManagingVariationsProductId] = useState<string | null>(null);
@@ -40,6 +40,7 @@ const AdminDashboard: React.FC = () => {
     <VariationManager
       product={variationManagerProduct}
       onClose={() => setManagingVariationsProductId(null)}
+      onUpdate={refreshProducts}
     />
   ) : null;
 
@@ -1121,40 +1122,7 @@ const AdminDashboard: React.FC = () => {
   // Guides view removed (Peptalk disabled)
 
 
-  // Settings View
-  if (currentView === 'settings') {
-    // SiteSettingsManager doesn't seem to have onBack prop based on earlier view_file, 
-    // checking its content... it has handleCancel but assumes rendered in place or manages its own state.
-    // Looking at SiteSettingsManager.tsx line 251, it doesn't take props?
-    // Wait, SiteSettingsManager.tsx as viewed in step 181 has no props defined in React.FC.
-    // However, it has a back button logic internally? No, it has "Site Settings" header and Edit/Cancel buttons.
-    // I should probably wrap it or modify it to support onBack if I want consistent UI.
-    // For now I will wrap it in the standard layout style if needed, or just render it.
-    // Given the dashboard structure, other managers take onBack. 
-    // Let's assume for now I just render it, but I might need to make it comply with the layout.
-    // Actually, looking at other managers they render full screen or modify view.
-    // I'll render it and if it lacks a back button to dashboard, the user is stuck.
-    // SiteSettingsManager from step 181 DOES NOT have a back button to main dashboard.
-    // It has a "Cancel" button that exits edit mode.
-    // I should wrap it or modify it. 
-    // To match the requested speed, I'll modify AdminDashboard to render it with a manual Back button if needed, 
-    // OR simply assume I'll fix SiteSettingsManager later.
-    // BETTER: Render it inside the dashboard layout or add a wrapper here.
-    return (
-      <div className="min-h-screen bg-gray-50 p-4">
-        <div className="max-w-4xl mx-auto">
-          <button
-            onClick={() => setCurrentView('dashboard')}
-            className="mb-4 text-gray-600 hover:text-navy-900 flex items-center gap-2"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Dashboard
-          </button>
-          <SiteSettingsManager />
-        </div>
-      </div>
-    );
-  }
+
 
   // Dashboard View
   return (
@@ -1341,13 +1309,7 @@ const AdminDashboard: React.FC = () => {
                   <MessageSquareText className="h-4 w-4 text-gray-600" />
                   <span className="text-sm font-medium text-gray-700">Customer Testimonials</span>
                 </button>
-                <button
-                  onClick={() => setCurrentView('settings')}
-                  className="w-full flex items-center gap-3 p-2 text-left hover:bg-gray-50 rounded-lg transition-all"
-                >
-                  <Settings className="h-4 w-4 text-gray-600" />
-                  <span className="text-sm font-medium text-gray-700">Site Settings</span>
-                </button>
+
               </div>
             </div>
 

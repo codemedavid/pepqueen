@@ -32,7 +32,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
 
   // Payment
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
-  const [contactMethod, setContactMethod] = useState<'messenger' | ''>('messenger');
+  const [contactMethod, setContactMethod] = useState<'telegram' | 'whatsapp1' | 'whatsapp2' | ''>('telegram');
   const [notes, setNotes] = useState('');
 
   const [orderMessage, setOrderMessage] = useState<string>('');
@@ -170,7 +170,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
 
   const handlePlaceOrder = async () => {
     if (!contactMethod) {
-      alert('Please select your preferred contact method (Messenger).');
+      alert('Please select your preferred contact method.');
       return;
     }
 
@@ -325,7 +325,9 @@ ${paymentMethod ? `Account: ${paymentMethod.account_number}` : ''}
 ${paymentProofUrl ? 'Screenshot attached to order.' : 'Pending'}
 
 📱 CONTACT METHOD
-Messenger: https://m.me/PepQueen
+${contactMethod === 'whatsapp1' ? 'WhatsApp: 0919 002 3598' :
+          contactMethod === 'whatsapp2' ? 'WhatsApp: 0956 400 0312' :
+            'Telegram: @pepqmae'}
 
 📋 ORDER ID: ${orderData.id}
 
@@ -344,10 +346,11 @@ Please confirm this order. Thank you!
       }
 
       // Open contact method based on selection
-      // Using m.me link with Page ID to open Messenger directly
-      const contactUrl = contactMethod === 'messenger'
-        ? `https://m.me/61555961135365?text=${encodeURIComponent(orderDetails)}`
-        : null;
+      // Open contact method based on selection
+      let contactUrl = null;
+      if (contactMethod === 'telegram') contactUrl = `https://t.me/pepqmae`;
+      else if (contactMethod === 'whatsapp1') contactUrl = `https://api.whatsapp.com/send?phone=639190023598`;
+      else if (contactMethod === 'whatsapp2') contactUrl = `https://api.whatsapp.com/send?phone=639564000312`;
 
       if (contactUrl) {
         // Short delay to ensure clipboard write finishes and UI updates
@@ -401,9 +404,10 @@ Please confirm this order. Thank you!
   };
 
   const handleOpenContact = () => {
-    const contactUrl = contactMethod === 'messenger'
-      ? `https://m.me/61555961135365?text=${encodeURIComponent(orderMessage)}`
-      : null;
+    let contactUrl = null;
+    if (contactMethod === 'telegram') contactUrl = `https://t.me/pepqmae`;
+    else if (contactMethod === 'whatsapp1') contactUrl = `https://api.whatsapp.com/send?phone=639190023598`;
+    else if (contactMethod === 'whatsapp2') contactUrl = `https://api.whatsapp.com/send?phone=639564000312`;
 
     if (contactUrl) {
       window.open(contactUrl, '_blank');
@@ -423,7 +427,7 @@ Please confirm this order. Thank you!
               <Sparkles className="w-7 h-7 text-gold-600" />
             </h1>
             <p className="text-gray-600 mb-8 text-base md:text-lg leading-relaxed">
-              Copy the order message below and send it via Messenger along with your payment screenshot.
+              Copy the order message below and send it via {contactMethod === 'telegram' ? 'Telegram' : 'WhatsApp'} along with your payment screenshot.
             </p>
 
             {/* Order Message Display */}
@@ -458,7 +462,7 @@ Please confirm this order. Thank you!
               {copied && (
                 <p className="text-green-600 text-sm mt-2 flex items-center gap-1">
                   <Check className="w-4 h-4" />
-                  Message copied to clipboard! Paste it in Messenger along with your payment screenshot.
+                  Message copied to clipboard! Paste it in {contactMethod === 'telegram' ? 'Telegram' : 'WhatsApp'} along with your payment screenshot.
                 </p>
               )}
             </div>
@@ -470,12 +474,12 @@ Please confirm this order. Thank you!
                 className="w-full bg-navy-900 hover:bg-navy-800 text-white py-3 md:py-4 rounded-2xl font-bold text-base md:text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all flex items-center justify-center gap-2 border border-navy-900/20"
               >
                 <MessageCircle className="w-5 h-5" />
-                Open Messenger
+                Open {contactMethod === 'telegram' ? 'Telegram' : 'WhatsApp'}
               </button>
 
               {!contactOpened && (
                 <p className="text-sm text-gray-600">
-                  💡 If Messenger doesn't open, copy the message above and visit our page manually
+                  💡 If the app doesn't open, copy the message above and contact manually
                 </p>
               )}
             </div>
@@ -500,7 +504,7 @@ Please confirm this order. Thank you!
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-2xl">4️⃣</span>
-                  <span>Tracking numbers are sent via Messenger from 11 PM onwards.</span>
+                  <span>Tracking numbers are sent via Telegram from 11 PM onwards.</span>
                 </li>
               </ul>
             </div>
@@ -989,21 +993,72 @@ Please confirm this order. Thank you!
                 Preferred Contact Method *
               </h2>
               <div className="grid grid-cols-1 gap-3">
+                {/* WhatsApp 1 */}
                 <button
-                  onClick={() => setContactMethod('messenger')}
-                  className={`p-4 rounded-lg border-2 transition-all flex items-center justify-between ${contactMethod === 'messenger'
+                  onClick={() => setContactMethod('whatsapp1')}
+                  className={`p-4 rounded-lg border-2 transition-all flex items-center justify-between ${contactMethod === 'whatsapp1'
                     ? 'border-navy-900 bg-gold-50'
                     : 'border-gray-200 hover:border-navy-700'
                     }`}
                 >
                   <div className="flex items-center gap-3">
-                    <MessageCircle className="w-6 h-6 text-gold-600" />
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-[#25D366]">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                    </svg>
                     <div className="text-left">
-                      <p className="font-semibold text-navy-900">Messenger</p>
-                      <p className="text-sm text-gray-500">PepQueen</p>
+                      <p className="font-semibold text-navy-900">WhatsApp</p>
+                      <p className="text-sm text-gray-500">0919 002 3598</p>
                     </div>
                   </div>
-                  {contactMethod === 'messenger' && (
+                  {contactMethod === 'whatsapp1' && (
+                    <div className="w-6 h-6 bg-gold-600 rounded-full flex items-center justify-center">
+                      <span className="text-black text-xs font-bold">✓</span>
+                    </div>
+                  )}
+                </button>
+
+                {/* WhatsApp 2 */}
+                <button
+                  onClick={() => setContactMethod('whatsapp2')}
+                  className={`p-4 rounded-lg border-2 transition-all flex items-center justify-between ${contactMethod === 'whatsapp2'
+                    ? 'border-navy-900 bg-gold-50'
+                    : 'border-gray-200 hover:border-navy-700'
+                    }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-[#25D366]">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                    </svg>
+                    <div className="text-left">
+                      <p className="font-semibold text-navy-900">WhatsApp</p>
+                      <p className="text-sm text-gray-500">0956 400 0312</p>
+                    </div>
+                  </div>
+                  {contactMethod === 'whatsapp2' && (
+                    <div className="w-6 h-6 bg-gold-600 rounded-full flex items-center justify-center">
+                      <span className="text-black text-xs font-bold">✓</span>
+                    </div>
+                  )}
+                </button>
+
+                {/* Telegram */}
+                <button
+                  onClick={() => setContactMethod('telegram')}
+                  className={`p-4 rounded-lg border-2 transition-all flex items-center justify-between ${contactMethod === 'telegram'
+                    ? 'border-navy-900 bg-gold-50'
+                    : 'border-gray-200 hover:border-navy-700'
+                    }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-[#0088cc]">
+                      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 11.944 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                    </svg>
+                    <div className="text-left">
+                      <p className="font-semibold text-navy-900">Telegram</p>
+                      <p className="text-sm text-gray-500">@pepqmae</p>
+                    </div>
+                  </div>
+                  {contactMethod === 'telegram' && (
                     <div className="w-6 h-6 bg-gold-600 rounded-full flex items-center justify-center">
                       <span className="text-black text-xs font-bold">✓</span>
                     </div>

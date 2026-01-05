@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Trash2, Edit2, Save, X, GripVertical, Image, Eye, EyeOff } from 'lucide-react';
+import { Plus, Trash2, Edit2, Save, X, GripVertical, Image as ImageIcon, Eye, EyeOff } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import ImageUpload from './ImageUpload';
 
 interface Testimonial {
     id: string;
@@ -9,22 +10,23 @@ interface Testimonial {
     image_url: string;
     display_order: number;
     is_active: boolean;
+    category: 'proof_of_transactions' | 'proof_of_delivered' | 'customer_reviews';
     created_at: string;
 }
 
 const TestimonialsManager: React.FC = () => {
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [editingId, setEditingId] = useState<string | null>(null);
-    const [showAddForm, setShowAddForm] = useState(false);
-    const [uploading, setUploading] = useState(false);
-
     const [formData, setFormData] = useState({
         title: '',
         description: '',
         image_url: '',
-        is_active: true
+        is_active: true,
+        category: 'customer_reviews' as Testimonial['category']
     });
+    const [loading, setLoading] = useState(true);
+    const [editingId, setEditingId] = useState<string | null>(null);
+    const [showAddForm, setShowAddForm] = useState(false);
+
 
     useEffect(() => {
         fetchTestimonials();
@@ -46,37 +48,13 @@ const TestimonialsManager: React.FC = () => {
         }
     };
 
-    const handleImageUpload = async (file: File) => {
-        setUploading(true);
-        try {
-            const fileExt = file.name.split('.').pop();
-            const fileName = `testimonial-${Date.now()}.${fileExt}`;
-            const filePath = `testimonials/${fileName}`;
 
-            const { error: uploadError } = await supabase.storage
-                .from('images')
-                .upload(filePath, file);
-
-            if (uploadError) throw uploadError;
-
-            const { data: { publicUrl } } = supabase.storage
-                .from('images')
-                .getPublicUrl(filePath);
-
-            setFormData(prev => ({ ...prev, image_url: publicUrl }));
-        } catch (error) {
-            console.error('Error uploading image:', error);
-            alert('Failed to upload image. Please try again.');
-        } finally {
-            setUploading(false);
-        }
-    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!formData.title || !formData.description || !formData.image_url) {
-            alert('Please fill in all required fields');
+        if (!formData.title || !formData.description) {
+            alert('Please fill in title and description');
             return;
         }
 
@@ -88,7 +66,8 @@ const TestimonialsManager: React.FC = () => {
                         title: formData.title,
                         description: formData.description,
                         image_url: formData.image_url,
-                        is_active: formData.is_active
+                        is_active: formData.is_active,
+                        category: formData.category
                     })
                     .eq('id', editingId);
 
@@ -102,7 +81,8 @@ const TestimonialsManager: React.FC = () => {
                         description: formData.description,
                         image_url: formData.image_url,
                         is_active: formData.is_active,
-                        display_order: maxOrder + 1
+                        display_order: maxOrder + 1,
+                        category: formData.category
                     });
 
                 if (error) throw error;
@@ -153,7 +133,8 @@ const TestimonialsManager: React.FC = () => {
             title: testimonial.title,
             description: testimonial.description,
             image_url: testimonial.image_url,
-            is_active: testimonial.is_active
+            is_active: testimonial.is_active,
+            category: testimonial.category || 'customer_reviews'
         });
         setShowAddForm(true);
     };
@@ -163,7 +144,8 @@ const TestimonialsManager: React.FC = () => {
             title: '',
             description: '',
             image_url: '',
-            is_active: true
+            is_active: true,
+            category: 'customer_reviews'
         });
         setEditingId(null);
         setShowAddForm(false);
@@ -246,7 +228,7 @@ const TestimonialsManager: React.FC = () => {
                                 value={formData.title}
                                 onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
                                 placeholder="e.g., Dosage Guidance & Effectiveness"
-                                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-rose-300 focus:border-rose-400 outline-none transition-all"
+                                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-rose-300 focus:border-rose-400 outline-none transition-all text-gray-900 bg-white"
                             />
                         </div>
 
@@ -259,45 +241,36 @@ const TestimonialsManager: React.FC = () => {
                                 onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
                                 placeholder="Describe what the testimonial shows..."
                                 rows={3}
-                                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-rose-300 focus:border-rose-400 outline-none transition-all resize-none"
+                                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-rose-300 focus:border-rose-400 outline-none transition-all resize-none text-gray-900 bg-white"
                             />
                         </div>
 
                         <div>
                             <label className="block text-sm font-medium text-neutral-700 mb-1">
-                                Screenshot Image *
+                                Screenshot Image (Optional)
                             </label>
-                            <div className="flex gap-3">
-                                <div className="flex-1">
-                                    <input
-                                        type="text"
-                                        value={formData.image_url}
-                                        onChange={(e) => setFormData(prev => ({ ...prev, image_url: e.target.value }))}
-                                        placeholder="Image URL or upload below"
-                                        className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-rose-300 focus:border-rose-400 outline-none transition-all"
-                                    />
-                                </div>
-                                <label className="flex items-center gap-2 px-4 py-2 bg-neutral-100 text-neutral-700 rounded-lg hover:bg-neutral-200 transition-colors cursor-pointer">
-                                    <Image className="w-5 h-5" />
-                                    {uploading ? 'Uploading...' : 'Upload'}
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        className="hidden"
-                                        onChange={(e) => e.target.files?.[0] && handleImageUpload(e.target.files[0])}
-                                        disabled={uploading}
-                                    />
-                                </label>
-                            </div>
-                            {formData.image_url && (
-                                <div className="mt-2">
-                                    <img
-                                        src={formData.image_url}
-                                        alt="Preview"
-                                        className="h-32 w-auto object-cover rounded-lg border border-neutral-200"
-                                    />
-                                </div>
-                            )}
+                            <ImageUpload
+                                currentImage={formData.image_url}
+                                onImageChange={(url) => setFormData(prev => ({ ...prev, image_url: url || '' }))}
+                                folder="testimonials"
+                            />
+                        </div>
+
+
+
+                        <div>
+                            <label className="block text-sm font-medium text-neutral-700 mb-1">
+                                Category *
+                            </label>
+                            <select
+                                value={formData.category}
+                                onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value as Testimonial['category'] }))}
+                                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-rose-300 focus:border-rose-400 outline-none transition-all text-gray-900 bg-white"
+                            >
+                                <option value="customer_reviews">Customer Review</option>
+                                <option value="proof_of_transactions">Proof of Payment</option>
+                                <option value="proof_of_delivered">Proof of Delivery</option>
+                            </select>
                         </div>
 
                         <div className="flex items-center gap-2">
@@ -337,7 +310,7 @@ const TestimonialsManager: React.FC = () => {
             <div className="space-y-3">
                 {testimonials.length === 0 ? (
                     <div className="text-center py-12 bg-neutral-50 rounded-xl border border-dashed border-neutral-300">
-                        <Image className="w-12 h-12 mx-auto text-neutral-300 mb-3" />
+                        <ImageIcon className="w-12 h-12 mx-auto text-neutral-300 mb-3" />
                         <p className="text-neutral-500">No testimonials yet</p>
                         <p className="text-sm text-neutral-400">Add your first customer testimonial above</p>
                     </div>
@@ -371,6 +344,16 @@ const TestimonialsManager: React.FC = () => {
                             {/* Content */}
                             <div className="flex-1 min-w-0">
                                 <h4 className="font-medium text-neutral-800 truncate">{testimonial.title}</h4>
+                                <div className="flex items-center gap-2 mb-1">
+                                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${testimonial.category === 'proof_of_transactions' ? 'bg-blue-100 text-blue-700' :
+                                        testimonial.category === 'proof_of_delivered' ? 'bg-green-100 text-green-700' :
+                                            'bg-amber-100 text-amber-700'
+                                        }`}>
+                                        {testimonial.category === 'proof_of_transactions' ? 'Proof of Payment' :
+                                            testimonial.category === 'proof_of_delivered' ? 'Proof of Delivery' :
+                                                'Customer Review'}
+                                    </span>
+                                </div>
                                 <p className="text-sm text-neutral-500 line-clamp-2">{testimonial.description}</p>
                             </div>
 
@@ -379,8 +362,8 @@ const TestimonialsManager: React.FC = () => {
                                 <button
                                     onClick={() => toggleActive(testimonial.id, testimonial.is_active)}
                                     className={`p-2 rounded-lg transition-colors ${testimonial.is_active
-                                            ? 'text-green-600 hover:bg-green-50'
-                                            : 'text-neutral-400 hover:bg-neutral-100'
+                                        ? 'text-green-600 hover:bg-green-50'
+                                        : 'text-neutral-400 hover:bg-neutral-100'
                                         }`}
                                     title={testimonial.is_active ? 'Hide' : 'Show'}
                                 >
