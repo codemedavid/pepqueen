@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCOAPageSetting } from '../hooks/useCOAPageSetting';
-import { ShoppingCart, Menu, X, MessageCircle, Calculator, FileText, HelpCircle, Truck, ClipboardCheck, Users } from 'lucide-react';
+import { ShoppingCart, Menu, X, Calculator, FileText, HelpCircle, Truck, ClipboardCheck, Users } from 'lucide-react';
 
 interface HeaderProps {
   cartItemsCount: number;
@@ -96,15 +96,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                   <Users className="w-4 h-4" />
                   Reviews
                 </a>
-                <a
-                  href="https://t.me/+k3SfL4WjnMQ3NGRl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-medium text-neutral-400 hover:text-[#0088cc] transition-colors flex items-center gap-1"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  Join Community
-                </a>
+
               </nav>
 
               {/* Cart Button */}
@@ -276,20 +268,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                   </div>
                   Customer Reviews
                 </a>
-                <a
-                  href="https://t.me/+k3SfL4WjnMQ3NGRl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 rounded-brand text-left font-medium text-base text-neutral-300 hover:text-[#0088cc] hover:bg-neutral-900 transition-all group"
-                >
-                  <div
-                    className="p-2 rounded-brand transition-all"
-                    style={{ backgroundColor: 'rgba(0, 136, 204, 0.1)', border: '1px solid rgba(0, 136, 204, 0.2)' }}
-                  >
-                    <MessageCircle className="w-5 h-5 text-[#0088cc]" />
-                  </div>
-                  Join Community
-                </a>
+
               </div>
             </nav>
           </div>

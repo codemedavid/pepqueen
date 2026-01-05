@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle, Heart, HelpCircle, Calculator, FileText, Truck, ClipboardCheck, Sparkles } from 'lucide-react';
+import { Heart, HelpCircle, Calculator, FileText, Truck, ClipboardCheck, Sparkles } from 'lucide-react';
 import { useCOAPageSetting } from '../hooks/useCOAPageSetting';
 
 const Footer: React.FC = () => {
@@ -31,12 +31,8 @@ const Footer: React.FC = () => {
           {/* Contact Emails */}
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-sm text-neutral-500">
             <span className="text-xs font-medium uppercase" style={{ color: '#D4AF37' }}>Contact Us:</span>
-            <a href="mailto:peptidewhisperer@gmail.com" className="hover:text-gold transition-colors">
-              peptidewhisperer@gmail.com
-            </a>
-            <span className="hidden sm:inline text-neutral-700">|</span>
-            <a href="mailto:thepeptidepulse@gmail.com" className="hover:text-gold transition-colors">
-              thepeptidepulse@gmail.com
+            <a href="mailto:peptidemae89@gmail.com" className="hover:text-gold transition-colors">
+              peptidemae89@gmail.com
             </a>
           </div>
 
@@ -79,15 +75,7 @@ const Footer: React.FC = () => {
               <ClipboardCheck className="w-4 h-4" />
               Assessment
             </a>
-            <a
-              href="https://t.me/+k3SfL4WjnMQ3NGRl"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-neutral-500 hover:text-[#0088cc] transition-colors flex items-center gap-2 text-sm font-medium"
-            >
-              <MessageCircle className="w-4 h-4" />
-              Join Community
-            </a>
+
             <a
               href="https://www.tiktok.com/@peptidepulse20?_r=1&_t=ZS-92SrpIepm5s"
               target="_blank"
