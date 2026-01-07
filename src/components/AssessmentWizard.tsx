@@ -65,46 +65,46 @@ const TermsAndConditions: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         <div className="space-y-6 animate-fadeIn transition-all duration-300">
             <button
                 onClick={onBack}
-                className="flex items-center text-gray-500 hover:text-theme-text transition-colors mb-4 group"
+                className="flex items-center text-gray-500 hover:text-gray-900 transition-colors mb-4 group"
             >
                 <ChevronLeft className="w-5 h-5 mr-1 group-hover:-translate-x-1 transition-transform" /> Back to Assessment
             </button>
 
-            <h2 className="text-2xl font-bold text-theme-text mb-6">Terms and Conditions</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Terms and Conditions</h2>
 
             <div className="space-y-6 text-gray-700 leading-relaxed overflow-y-auto max-h-[60vh] pr-2">
                 <section>
-                    <h3 className="font-bold text-theme-text mb-2">1. Acceptance of Terms</h3>
+                    <h3 className="font-bold text-gray-900 mb-2">1. Acceptance of Terms</h3>
                     <p>By accessing and using PepQueen, you accept and agree to be bound by the terms and provision of this agreement.</p>
                 </section>
 
                 <section>
-                    <h3 className="font-bold text-theme-text mb-2">2. Research Purposes Only</h3>
+                    <h3 className="font-bold text-gray-900 mb-2">2. Research Purposes Only</h3>
                     <p>All peptides sold on this website are for research purposes only. They are not intended for human consumption, medical use, or any therapeutic application. By purchasing from PepQueen, you acknowledge that you are a qualified researcher or institution.</p>
                 </section>
 
                 <section>
-                    <h3 className="font-bold text-theme-text mb-2">3. Assessment Disclaimer</h3>
+                    <h3 className="font-bold text-gray-900 mb-2">3. Assessment Disclaimer</h3>
                     <p>The peptide assessment tool is for informational and educational purposes only. It does not constitute medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider before starting any new health regimen or supplement program.</p>
                 </section>
 
                 <section>
-                    <h3 className="font-bold text-theme-text mb-2">4. Product Information</h3>
+                    <h3 className="font-bold text-gray-900 mb-2">4. Product Information</h3>
                     <p>While we strive to provide accurate product information, we do not warrant that product descriptions or other content is accurate, complete, reliable, current, or error-free.</p>
                 </section>
 
                 <section>
-                    <h3 className="font-bold text-theme-text mb-2">5. Limitation of Liability</h3>
+                    <h3 className="font-bold text-gray-900 mb-2">5. Limitation of Liability</h3>
                     <p>PepQueen shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of or inability to use the service.</p>
                 </section>
 
                 <section>
-                    <h3 className="font-bold text-theme-text mb-2">6. Age Restriction</h3>
+                    <h3 className="font-bold text-gray-900 mb-2">6. Age Restriction</h3>
                     <p>You must be at least 18 years old to use this website and purchase products.</p>
                 </section>
 
                 <section>
-                    <h3 className="font-bold text-theme-text mb-2">7. Contact Information</h3>
+                    <h3 className="font-bold text-gray-900 mb-2">7. Contact Information</h3>
                     <p>If you have any questions about these Terms and Conditions, please contact us at support@chainform.com</p>
                 </section>
             </div>
@@ -269,7 +269,7 @@ const AssessmentWizard: React.FC = () => {
                         <div className="w-20 h-20 bg-magenta-50 rounded-full flex items-center justify-center mx-auto mb-6">
                             <ClipboardCheck className="w-10 h-10 text-magenta-500" />
                         </div>
-                        <h2 className="text-3xl font-bold text-theme-text">Peptide Compatibility Assessment</h2>
+                        <h2 className="text-3xl font-bold text-gray-900">Peptide Compatibility Assessment</h2>
                         <p className="text-gray-600 max-w-lg mx-auto text-lg">
                             Discover the perfect peptide protocol tailored to your unique goals and physiology.
                             Complete this 2-minute assessment to get a personalized recommendation.
@@ -287,7 +287,7 @@ const AssessmentWizard: React.FC = () => {
                             <div className="w-16 h-16 bg-magenta-50 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <ShieldCheck className="w-8 h-8 text-magenta-500" />
                             </div>
-                            <h2 className="text-2xl font-bold text-theme-text">Thank you for choosing PepQueen!</h2>
+                            <h2 className="text-2xl font-bold text-gray-900">Thank you for choosing PepQueen!</h2>
                             <p className="text-gray-600 mt-2">Let's start by reviewing our terms and consent</p>
                         </div>
 
@@ -327,7 +327,7 @@ const AssessmentWizard: React.FC = () => {
             case 2: // Personal Info
                 return (
                     <div className="space-y-6 animate-fadeIn">
-                        <h3 className="text-2xl font-bold text-theme-text mb-4">Tell us about yourself</h3>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4">Tell us about yourself</h3>
                         <div className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
@@ -384,7 +384,7 @@ const AssessmentWizard: React.FC = () => {
                 return (
                     <div className="space-y-8 animate-fadeIn">
                         <div>
-                            <h3 className="text-2xl font-bold text-theme-text mb-2">Medical History</h3>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-2">Medical History</h3>
                             <p className="text-gray-500 text-sm mb-4">Please select if you have been diagnosed with any of the following. This helps us ensure safety.</p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {MEDICAL_CONDITIONS.map((condition) => (
@@ -411,7 +411,7 @@ const AssessmentWizard: React.FC = () => {
                 return (
                     <div className="space-y-8 animate-fadeIn">
                         <div>
-                            <h3 className="text-2xl font-bold text-theme-text mb-2">What are your primary goals?</h3>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-2">What are your primary goals?</h3>
                             <p className="text-gray-500 text-sm mb-4">Select all that apply.</p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {GOALS.map((goal) => (
@@ -433,7 +433,7 @@ const AssessmentWizard: React.FC = () => {
                         </div>
 
                         <div>
-                            <h3 className="text-xl font-bold text-theme-text mb-2">Experience Level</h3>
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">Experience Level</h3>
                             <div className="space-y-3">
                                 {EXPERIENCE_LEVELS.map((level) => (
                                     <label
@@ -465,7 +465,7 @@ const AssessmentWizard: React.FC = () => {
             case 5: // Preferences
                 return (
                     <div className="space-y-6 animate-fadeIn">
-                        <h3 className="text-2xl font-bold text-theme-text mb-4">Preferences</h3>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4">Preferences</h3>
 
                         <div className="space-y-4">
                             <div>
@@ -525,7 +525,7 @@ const AssessmentWizard: React.FC = () => {
                     {step > 0 && !showTerms && (
                         <button
                             onClick={prevStep}
-                            className="absolute top-8 left-8 text-gray-400 hover:text-theme-text transition-colors"
+                            className="absolute top-8 left-8 text-gray-400 hover:text-gray-900 transition-colors"
                         >
                             <ChevronLeft className="w-6 h-6" />
                         </button>
